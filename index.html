@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iMSS Group — KFUPM</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ─── HOME-SPECIFIC ─── */
+body { padding-top: 0; }
+
+.hero {
+  position: relative; height: 100vh; min-height: 680px;
+  display: flex; align-items: center;
+  overflow: hidden; background: var(--navy);
+}
+
+#wave-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; opacity: 0.55;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 4rem; max-width: 680px;
+  opacity: 0; transform: translateY(30px);
+  animation: fadeUp 0.9s 0.3s forwards;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-eyebrow::before {
+  content: ''; display: block;
+  width: 32px; height: 1px; background: var(--gold);
+}
+
+.hero-title {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 500; line-height: 1.12;
+  color: #fff; margin-bottom: 1.5rem;
+}
+.hero-title em { font-style: italic; color: var(--gold-light); }
+
+.hero-desc {
+  font-size: 1rem; font-weight: 300;
+  line-height: 1.8; color: rgba(255,255,255,0.6);
+  max-width: 500px; margin-bottom: 2.5rem;
+}
+
+.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 4rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  z-index: 2; opacity: 0;
+  animation: fadeUp 1s 1.2s forwards;
+}
+.scroll-line {
+  width: 1px; height: 36px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3));
+}
+
+/* ─── ABOUT ─── */
+.about-grid {
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: 5rem; align-items: start;
+}
+
+.about-text p {
+  font-size: 1rem; line-height: 1.85;
+  color: var(--muted); margin-bottom: 1.1rem;
+}
+.about-text p strong { color: var(--navy); font-weight: 500; }
+
+.about-info {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 2rem;
+}
+
+.info-row {
+  display: flex; gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.info-row:last-child { border-bottom: none; }
+
+.info-key {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--gold);
+  min-width: 90px; padding-top: 0.1rem;
+}
+
+.info-val {
+  font-size: 0.88rem; line-height: 1.55;
+  color: var(--muted);
+}
+
+/* ─── RESEARCH ─── */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5px; background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 2.5rem;
+}
+
+.rc {
+  background: var(--white); padding: 2.25rem;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s;
+}
+.rc::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; width: 100%; height: 2px;
+  background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.rc:hover { transform: translateY(-3px); }
+.rc:hover::after { transform: scaleX(1); }
+
+.rc-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; color: rgba(201,168,76,0.7);
+  letter-spacing: 0.1em; margin-bottom: 1.25rem;
+}
+.rc-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem; font-weight: 500;
+  color: var(--navy); margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+.rc-desc {
+  font-size: 0.85rem; line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ─── DISPERSION ─── */
+.disp-layout {
+  display: grid; grid-template-columns: 1fr 1.35fr;
+  gap: 4rem; align-items: start; margin-top: 2.5rem;
+}
+
+.disp-text p {
+  font-size: 0.9rem; line-height: 1.75;
+  color: rgba(255,255,255,0.55); margin-bottom: 1.5rem;
+}
+
+.ctrl { margin-bottom: 1.25rem; }
+.ctrl-label {
+  display: flex; justify-content: space-between;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.06em; margin-bottom: 0.4rem;
+}
+.ctrl-label span { color: var(--gold); }
+
+input[type=range] {
+  width: 100%; -webkit-appearance: none;
+  height: 2px; background: rgba(255,255,255,0.12); outline: none; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 12px; height: 12px;
+  border-radius: 50%; background: var(--gold); cursor: pointer;
+  transition: transform 0.15s;
+}
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.4); }
+
+#disp-canvas {
+  width: 100%; border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(0,0,0,0.2);
+}
+
+.disp-legend {
+  display: flex; gap: 1.5rem; margin-top: 0.75rem; flex-wrap: wrap;
+}
+.leg { display: flex; align-items: center; gap: 0.45rem;
+  font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+.leg-line { width: 16px; height: 2px; }
+
+/* ─── PUBLICATIONS PREVIEW ─── */
+.pub-preview { margin-top: 2.5rem; }
+
+.pub-item {
+  display: grid; grid-template-columns: 44px 1fr;
+  gap: 1.25rem; padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateX(-16px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.pub-item.visible { opacity: 1; transform: none; }
+
+.pub-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem; color: var(--gold);
+  padding-top: 0.2rem;
+}
+.pub-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem; color: var(--navy);
+  margin-bottom: 0.25rem; line-height: 1.4;
+}
+.pub-meta { font-size: 0.78rem; color: var(--muted); }
+.pub-meta em { color: var(--teal); font-style: italic; }
+
+.pub-award {
+  display: inline-block; margin-top: 0.35rem;
+  font-size: 0.65rem; padding: 0.2rem 0.55rem;
+  border: 1px solid rgba(29,158,117,0.3);
+  color: var(--teal); background: rgba(29,158,117,0.07);
+}
+
+/* ─── JOIN ─── */
+.join-inner { max-width: 580px; margin: 0 auto; text-align: center; }
+.join-inner .section-label { justify-content: center; }
+.join-inner .section-label::before { display: none; }
+.join-inner .section-title { color: #fff; margin-bottom: 1rem; }
+.join-inner > p {
+  font-size: 0.95rem; line-height: 1.8;
+  color: rgba(255,255,255,0.5); margin-bottom: 2.5rem;
+}
+
+.join-slots {
+  display: flex; gap: 1px; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 2.5rem; text-align: left;
+}
+.slot {
+  flex: 1; padding: 1.5rem;
+  background: rgba(11,37,69,0.7);
+}
+.slot-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem; color: var(--gold); margin-bottom: 0.3rem;
+}
+.slot p { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .hero-content { padding: 0 1.5rem; }
+  .hero-scroll { left: 1.5rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .disp-layout { grid-template-columns: 1fr; }
+  .join-slots { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">i<span>MSS</span> Group</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="wave-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-eyebrow">KFUPM · Mechanical Engineering · Dhahran</div>
+    <h1 class="hero-title">
+      Intelligent Metamaterials<br>
+      & <em>Smart Structures</em><br>Group
+    </h1>
+    <p class="hero-desc">
+      A research group at KFUPM studying programmable piezoelectric metamaterials — 
+      how we engineer materials that control elastic waves in ways nature alone cannot.
+    </p>
+    <div class="hero-cta">
+      <a href="research.html" class="btn btn-gold">Our Research</a>
+      <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section section-white" id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-label">About</div>
+      <h2 class="section-title">What we work on</h2>
+      <p>
+        The iMSS Group is a newly established research group in the 
+        <strong>Department of Mechanical Engineering at KFUPM</strong>, also affiliated with 
+        the Interdisciplinary Research Center for Intelligent Manufacturing and Robotics.
+      </p>
+      <p>
+        Our interest is in <strong>programmable piezoelectric metamaterials</strong> — structures 
+        whose wave-propagation behavior can be tuned digitally by adjusting electrical circuits 
+        connected to each unit cell. This opens up possibilities for reconfigurable wave 
+        devices, vibration control systems, and energy harvesting applications.
+      </p>
+      <p>
+        We are at an early stage and actively building the group. 
+        If the research sounds interesting to you, we would be glad to hear from you.
+      </p>
+    </div>
+    <div class="about-info reveal">
+      <div class="info-row">
+        <div class="info-key">PI</div>
+        <div class="info-val">Dr. Mustafa AlShaqaq<br>Assistant Professor</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">Dept.</div>
+        <div class="info-val">Mechanical Engineering, KFUPM</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">Affiliation</div>
+        <div class="info-val">IRC for Intelligent Manufacturing and Robotics</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">Location</div>
+        <div class="info-val">Dhahran, Eastern Province, Saudi Arabia</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">Email</div>
+        <div class="info-val">malshaqaq@kfupm.edu.sa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESEARCH -->
+<section class="section section-cream" id="research">
+  <div class="reveal">
+    <div class="section-label">Research</div>
+    <h2 class="section-title">Current directions</h2>
+  </div>
+  <div class="research-grid">
+    <div class="rc reveal">
+      <div class="rc-num">01</div>
+      <div class="rc-title">Programmable Wave Control</div>
+      <p class="rc-desc">Using graded piezoelectric arrays with digitally tuned shunt circuits to trap, compress, and steer elastic waves along a waveguide.</p>
+    </div>
+    <div class="rc reveal">
+      <div class="rc-num">02</div>
+      <div class="rc-title">Nonreciprocal Propagation</div>
+      <p class="rc-desc">Spatiotemporal modulation of electrical impedance to break wave reciprocity — enabling elastic waves to travel preferentially in one direction.</p>
+    </div>
+    <div class="rc reveal">
+      <div class="rc-num">03</div>
+      <div class="rc-title">Energy Harvesting</div>
+      <p class="rc-desc">Graded metastructures that simultaneously attenuate vibrations and harvest the trapped energy through the direct piezoelectric effect.</p>
+    </div>
+    <div class="rc reveal">
+      <div class="rc-num">04</div>
+      <div class="rc-title">Smart Structures</div>
+      <p class="rc-desc">Digitally programmable resonant elastic metamaterials using synthetic impedance circuits that allow rapid reconfiguration without hardware changes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE DISPERSION -->
+<section class="section section-navy" id="explore">
+  <div class="section-label" style="color:var(--gold)">Interactive</div>
+  <h2 class="section-title" style="color:#fff">Dispersion in a piezoelectric metamaterial</h2>
+  <div class="disp-layout">
+    <div class="disp-text reveal">
+      <p>
+        The dispersion relation describes how elastic waves propagate through a periodic 
+        metamaterial. When piezoelectric unit cells are shunted to inductive circuits, a 
+        band gap opens near the shunt resonant frequency — a range of frequencies where 
+        wave propagation is forbidden.
+      </p>
+      <p>
+        Adjust the sliders to see how the band gap responds to changes in shunt frequency, 
+        electromechanical coupling strength, and damping.
+      </p>
+      <div class="ctrl">
+        <div class="ctrl-label">Shunt resonant frequency ω<sub>t</sub>/ω<sub>0</sub> <span id="fv">1.00</span></div>
+        <input type="range" id="fs" min="0.4" max="1.6" step="0.01" value="1.0">
+      </div>
+      <div class="ctrl">
+        <div class="ctrl-label">Electromechanical coupling α <span id="av">0.15</span></div>
+        <input type="range" id="as" min="0.05" max="0.4" step="0.01" value="0.15">
+      </div>
+      <div class="ctrl">
+        <div class="ctrl-label">Damping ratio ζ <span id="dv">0.010</span></div>
+        <input type="range" id="ds" min="0.005" max="0.08" step="0.001" value="0.01">
+      </div>
+      <div class="disp-legend">
+        <div class="leg"><div class="leg-line" style="background:var(--gold)"></div>Shunted</div>
+        <div class="leg"><div class="leg-line" style="background:rgba(255,255,255,0.25)"></div>Short-circuit</div>
+        <div class="leg"><div class="leg-line" style="background:var(--teal);height:8px;width:8px;border-radius:50%"></div>Band gap</div>
+      </div>
+    </div>
+    <canvas id="disp-canvas" width="520" height="400"></canvas>
+  </div>
+</section>
+
+<!-- PUBLICATIONS PREVIEW -->
+<section class="section section-white" id="publications">
+  <div class="reveal">
+    <div class="section-label">Publications</div>
+    <h2 class="section-title">Selected papers</h2>
+  </div>
+  <div class="pub-preview">
+    <div class="pub-item">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">Digital programming of reciprocity breaking in resonant piezoelectric metamaterials</div>
+        <div class="pub-meta">M. AlShaqaq, C. Sugino, A. Erturk · <em>Physical Review Research</em>, 5, 043003</div>
+        <span class="pub-award">ASME Adaptive Structures Best Paper Award 2024</span>
+      </div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2022</div>
+      <div>
+        <div class="pub-title">Spatially programmable wave compression and signal enhancement in a piezoelectric metamaterial waveguide</div>
+        <div class="pub-meta">C. Sugino, M. AlShaqaq, A. Erturk · <em>Physical Review B</em>, 106, 174304</div>
+      </div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2022</div>
+      <div>
+        <div class="pub-title">Programmable rainbow trapping and band-gap enhancement via spatial group-velocity tailoring in elastic metamaterials</div>
+        <div class="pub-meta">M. AlShaqaq, C. Sugino, A. Erturk · <em>Physical Review Applied</em>, 17, L021003</div>
+      </div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2021</div>
+      <div>
+        <div class="pub-title">Graded multifunctional piezoelectric metastructures for wideband vibration attenuation and energy harvesting</div>
+        <div class="pub-meta">M. AlShaqaq, A. Erturk · <em>Smart Materials and Structures</em>, 30, 015029</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:2rem">
+    <a href="publications.html" class="btn btn-outline-dark">View all publications</a>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="section section-navy">
+  <div class="join-inner">
+    <div class="section-label">Openings</div>
+    <h2 class="section-title">Interested in joining?</h2>
+    <p>
+      The group is in its early stages and we are looking for motivated students 
+      who want to work on interesting problems at the intersection of mechanics, 
+      materials, and wave physics. If that sounds like you, reach out.
+    </p>
+    <div class="join-slots">
+      <div class="slot">
+        <div class="slot-title">PhD</div>
+        <p>Funded positions available. Background in mechanics, physics, or engineering preferred.</p>
+      </div>
+      <div class="slot">
+        <div class="slot-title">MS</div>
+        <p>Research-track MS projects in smart structures and metamaterials.</p>
+      </div>
+      <div class="slot">
+        <div class="slot-title">Undergrad</div>
+        <p>Senior project opportunities for motivated KFUPM students.</p>
+      </div>
+    </div>
+    <a href="mailto:malshaqaq@kfupm.edu.sa" class="btn btn-gold">malshaqaq@kfupm.edu.sa</a>
+  </div>
+</section>
+
+<footer>
+  <a class="footer-logo" href="index.html">i<span>MSS</span> Group</a>
+  <ul class="footer-links">
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p class="copy">© 2025 Mustafa AlShaqaq · KFUPM</p>
+</footer>
+
+<script>
+// ── WAVE BACKGROUND ──
+const wC = document.getElementById('wave-canvas');
+const wX = wC.getContext('2d');
+let wW, wH, t = 0;
+const waves = [
+  {a:40, f:0.008, s:0.018, p:0,   c:'rgba(201,168,76,0.15)',  y:0.45},
+  {a:28, f:0.012, s:0.025, p:2.1, c:'rgba(29,158,117,0.10)',  y:0.55},
+  {a:20, f:0.006, s:0.012, p:4.2, c:'rgba(255,255,255,0.05)', y:0.50},
+  {a:48, f:0.005, s:0.009, p:1.0, c:'rgba(201,168,76,0.06)',  y:0.62},
+  {a:16, f:0.018, s:0.032, p:3.5, c:'rgba(29,158,117,0.07)',  y:0.38},
+];
+function resizeW(){ wW = wC.width = wC.offsetWidth; wH = wC.height = wC.offsetHeight; }
+resizeW(); window.addEventListener('resize', resizeW);
+(function loop(){
+  wX.clearRect(0,0,wW,wH); t += 0.016;
+  waves.forEach(w => {
+    wX.beginPath();
+    for(let x=0; x<=wW; x+=2){
+      const y = wH*w.y + Math.sin(x*w.f + t*w.s*60 + w.p)*w.a;
+      x===0 ? wX.moveTo(x,y) : wX.lineTo(x,y);
+    }
+    wX.strokeStyle = w.c; wX.lineWidth = 1.5; wX.stroke();
+  });
+  requestAnimationFrame(loop);
+})();
+
+// ── DISPERSION CURVE ──
+const dc = document.getElementById('disp-canvas');
+const dx = dc.getContext('2d');
+const DW = dc.width, DH = dc.height;
+const P = {t:30, r:30, b:48, l:56};
+const PW = DW-P.l-P.r, PH = DH-P.t-P.b;
+let wt=1.0, al=0.15, ze=0.01;
+
+document.getElementById('fs').oninput = e => { wt=+e.target.value; document.getElementById('fv').textContent=wt.toFixed(2); draw(); };
+document.getElementById('as').oninput = e => { al=+e.target.value; document.getElementById('av').textContent=al.toFixed(2); draw(); };
+document.getElementById('ds').oninput = e => { ze=+e.target.value; document.getElementById('dv').textContent=ze.toFixed(3); draw(); };
+
+function branches(k, wt, al){
+  const kn = k*Math.PI, wt2=wt*wt;
+  const b = -(kn*kn + wt2*(1+al));
+  const c = kn*kn*wt2;
+  const d = b*b - 4*c;
+  if(d<0) return [null,null];
+  return [Math.sqrt((-b-Math.sqrt(d))/2), Math.sqrt((-b+Math.sqrt(d))/2)];
+}
+
+function draw(){
+  dx.clearRect(0,0,DW,DH);
+  const maxK=1, maxW=2.2;
+
+  // Band gap shading
+  const gL = wt*Math.sqrt(1/(1+al));
+  const gH = wt;
+  const y1 = P.t+PH-(gL/maxW)*PH;
+  const y2 = P.t+PH-(gH/maxW)*PH;
+  dx.fillStyle='rgba(29,158,117,0.1)';
+  dx.fillRect(P.l, Math.min(y1,y2), PW, Math.abs(y1-y2));
+  dx.setLineDash([4,4]);
+  dx.strokeStyle='rgba(29,158,117,0.25)'; dx.lineWidth=0.75;
+  [y1,y2].forEach(y=>{ dx.beginPath(); dx.moveTo(P.l,y); dx.lineTo(P.l+PW,y); dx.stroke(); });
+  dx.setLineDash([]);
+  dx.fillStyle='rgba(29,158,117,0.55)';
+  dx.font='9px DM Mono,monospace';
+  dx.fillText('band gap', P.l+PW-58, (y1+y2)/2+3);
+
+  // Grid
+  dx.strokeStyle='rgba(255,255,255,0.05)'; dx.lineWidth=1;
+  for(let i=0;i<=4;i++){
+    const gy=P.t+(i/4)*PH; dx.beginPath(); dx.moveTo(P.l,gy); dx.lineTo(P.l+PW,gy); dx.stroke();
+    const gx=P.l+(i/4)*PW; dx.beginPath(); dx.moveTo(gx,P.t); dx.lineTo(gx,P.t+PH); dx.stroke();
+  }
+
+  // Short-circuit
+  dx.beginPath(); dx.strokeStyle='rgba(255,255,255,0.2)'; dx.lineWidth=1.5;
+  for(let i=0;i<=200;i++){
+    const k=(i/200)*maxK, w=k*Math.PI;
+    if(w>maxW) break;
+    const x=P.l+(k/maxK)*PW, y=P.t+PH-(w/maxW)*PH;
+    i===0 ? dx.moveTo(x,y) : dx.lineTo(x,y);
+  }
+  dx.stroke();
+
+  // Shunted branches
+  ['#C9A84C','#e8c97a'].forEach((col,br)=>{
+    dx.beginPath(); dx.strokeStyle=col; dx.lineWidth=2;
+    let prev=null;
+    for(let i=0;i<=300;i++){
+      const k=(i/300)*maxK;
+      const [w1,w2]=branches(k,wt,al);
+      const w=br===0?w1:w2;
+      if(!w||isNaN(w)||w>maxW){ prev=null; continue; }
+      const x=P.l+(k/maxK)*PW, y=P.t+PH-(w/maxW)*PH;
+      if(prev && Math.abs(y-prev.y)<25){ dx.lineTo(x,y); }
+      else { if(prev){ dx.stroke(); dx.beginPath(); dx.strokeStyle=col; dx.lineWidth=2; } dx.moveTo(x,y); }
+      prev={x,y};
+    }
+    dx.stroke();
+  });
+
+  // Axes
+  dx.strokeStyle='rgba(255,255,255,0.2)'; dx.lineWidth=1;
+  dx.beginPath(); dx.moveTo(P.l,P.t); dx.lineTo(P.l,P.t+PH); dx.lineTo(P.l+PW,P.t+PH); dx.stroke();
+
+  // Labels
+  dx.fillStyle='rgba(255,255,255,0.3)'; dx.font='10px DM Mono,monospace';
+  dx.textAlign='center';
+  dx.fillText('Wave number  ka/π', P.l+PW/2, DH-6);
+  dx.save(); dx.translate(12,P.t+PH/2); dx.rotate(-Math.PI/2);
+  dx.fillText('Frequency  ω/ω₀',0,0); dx.restore();
+  for(let i=0;i<=4;i++){
+    dx.textAlign='center';
+    dx.fillText((i*0.25).toFixed(2), P.l+(i/4)*PW, P.t+PH+14);
+    dx.textAlign='right';
+    dx.fillText((i*maxW/4).toFixed(1), P.l-6, P.t+PH-(i/4)*PH+3);
+  }
+}
+draw();
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const pObs = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){
+    const i = [...document.querySelectorAll('.pub-item')].indexOf(e.target);
+    setTimeout(()=>e.target.classList.add('visible'), i*100);
+  }
+}), {threshold:0.1});
+document.querySelectorAll('.pub-item').forEach(el=>pObs.observe(el));
+</script>
+</body>
+</html>

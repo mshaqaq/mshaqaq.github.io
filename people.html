@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People — iMSS Group</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.pi-card {
+  display: grid; grid-template-columns: 200px 1fr;
+  gap: 3rem; align-items: start;
+  padding: 2.5rem; background: var(--white);
+  border: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.pi-photo {
+  width: 200px; height: 220px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  text-align: center; padding: 1rem;
+}
+
+.pi-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.6rem; font-weight: 500;
+  color: var(--navy); margin-bottom: 0.2rem;
+}
+
+.pi-title {
+  font-size: 0.85rem; color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.pi-bio p {
+  font-size: 0.92rem; line-height: 1.8;
+  color: var(--muted); margin-bottom: 0.9rem;
+}
+
+.pi-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.25rem; }
+.pi-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border); color: var(--muted);
+  text-decoration: none; transition: all 0.2s;
+}
+.pi-link:hover { border-color: var(--gold); color: var(--gold); }
+
+.openings-box {
+  background: var(--navy); padding: 3rem;
+  border-left: 3px solid var(--gold);
+}
+
+.openings-box h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.4rem; color: #fff;
+  margin-bottom: 1rem;
+}
+
+.openings-box p {
+  font-size: 0.9rem; line-height: 1.8;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 1.5rem;
+}
+
+.opening-list { list-style: none; margin-bottom: 2rem; }
+.opening-list li {
+  display: flex; gap: 1rem; align-items: start;
+  padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.88rem; color: rgba(255,255,255,0.6);
+}
+.opening-list li::before {
+  content: '→'; color: var(--gold); font-family: 'DM Mono', monospace;
+  font-size: 0.72rem; padding-top: 0.1rem; flex-shrink: 0;
+}
+
+@media(max-width:700px){
+  .pi-card { grid-template-columns: 1fr; }
+  .pi-photo { width: 100%; height: 200px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">i<span>MSS</span> Group</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="people.html" class="active">People</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="eyebrow">iMSS Group</div>
+  <h1>People</h1>
+  <p>The group is just getting started. We are looking for curious, self-driven students who want to work on real problems.</p>
+</div>
+
+<section class="section section-white">
+  <div class="section-label">Principal Investigator</div>
+
+  <div class="pi-card reveal">
+    <div class="pi-photo">
+      <!-- Replace with: <img src="assets/img/prof_pic.jpg" alt="Mustafa AlShaqaq"> -->
+      Place your photo here:<br>assets/img/prof_pic.jpg
+    </div>
+    <div>
+      <div class="pi-name">Mustafa AlShaqaq</div>
+      <div class="pi-title">Assistant Professor · Mechanical Engineering · KFUPM</div>
+      <div class="pi-bio">
+        <p>
+          I joined KFUPM as an Assistant Professor in 2023. Before that I was at 
+          Georgia Tech, where I worked on programmable piezoelectric metamaterials 
+          for wave control, nonreciprocal propagation, and energy harvesting.
+        </p>
+        <p>
+          My research is about understanding how engineered periodic structures interact 
+          with elastic waves — and how we can use electrical circuits to program that 
+          interaction in real time. I am interested in both the physics and the 
+          experimental realization of these ideas.
+        </p>
+        <p>
+          I am also affiliated with the Interdisciplinary Research Center for 
+          Intelligent Manufacturing and Robotics at KFUPM.
+        </p>
+      </div>
+      <div class="pi-links">
+        <a class="pi-link" href="mailto:malshaqaq@kfupm.edu.sa">Email</a>
+        <a class="pi-link" href="https://scholar.google.com/citations?user=j0fzfS4AAAAJ&hl=en" target="_blank">Google Scholar</a>
+        <a class="pi-link" href="https://orcid.org/0000-0002-4407-8980" target="_blank">ORCID</a>
+        <a class="pi-link" href="contact.html">CV</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="openings-box reveal">
+    <h3>Openings</h3>
+    <p>
+      The group is new and we currently have openings at multiple levels. 
+      If you are interested in metamaterials, wave mechanics, smart structures, 
+      or related areas — and you enjoy a mix of theory, computation, and experiments — 
+      please get in touch.
+    </p>
+    <ul class="opening-list">
+      <li>PhD positions — funded, starting 2025/2026. Background in mechanical engineering, physics, or applied math.</li>
+      <li>MS research track — projects available in programmable metamaterials and vibration control.</li>
+      <li>Undergraduate senior projects — open to KFUPM students interested in the group's research.</li>
+    </ul>
+    <a href="mailto:malshaqaq@kfupm.edu.sa" class="btn btn-gold">Contact Dr. AlShaqaq</a>
+  </div>
+</section>
+
+<footer>
+  <a class="footer-logo" href="index.html">i<span>MSS</span> Group</a>
+  <ul class="footer-links">
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p class="copy">© 2025 Mustafa AlShaqaq · KFUPM</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

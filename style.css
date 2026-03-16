@@ -1,0 +1,185 @@
+/* ─── iMSS Group — Shared Stylesheet ─── */
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --navy:       #0B2545;
+  --navy-light: #13365e;
+  --gold:       #C9A84C;
+  --gold-light: #e8c97a;
+  --teal:       #1D9E75;
+  --cream:      #F8F5EE;
+  --white:      #ffffff;
+  --text:       #1a1a2e;
+  --muted:      #5a6070;
+  --border:     rgba(11,37,69,0.1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+  padding-top: 64px;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 4rem; height: 64px;
+  background: rgba(11,37,69,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+
+.nav-logo {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.35rem; color: #fff;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.78rem; font-weight: 400;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+/* ─── PAGE HEADER ─── */
+.page-header {
+  background: var(--navy);
+  padding: 5rem 4rem 4rem;
+  border-bottom: 3px solid var(--gold);
+}
+
+.page-header .eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.page-header .eyebrow::before {
+  content: ''; display: block;
+  width: 24px; height: 1px; background: var(--gold);
+}
+
+.page-header h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 500; color: #fff;
+  line-height: 1.15;
+}
+
+.page-header p {
+  margin-top: 1rem;
+  font-size: 1rem; line-height: 1.75;
+  color: rgba(255,255,255,0.55);
+  max-width: 560px;
+}
+
+/* ─── SECTION UTILITIES ─── */
+.section { padding: 5rem 4rem; }
+.section-white { background: var(--white); }
+.section-cream { background: var(--cream); }
+.section-navy  { background: var(--navy); }
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 0.75rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.section-label::before {
+  content: ''; display: block;
+  width: 24px; height: 1px; background: var(--gold);
+}
+
+.section-title {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 500; line-height: 1.2;
+  color: var(--navy); margin-bottom: 0.75rem;
+}
+.section-navy .section-title { color: #fff; }
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.8rem;
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-gold {
+  background: var(--gold); color: var(--navy); border: none;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.btn-outline {
+  background: transparent; border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.7);
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.btn-outline-dark {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--navy);
+}
+.btn-outline-dark:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px; background: var(--border);
+  margin: 0;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: #070f1c;
+  padding: 2rem 4rem;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem; color: rgba(255,255,255,0.35);
+  text-decoration: none;
+}
+.footer-logo span { color: var(--gold); }
+.footer-links { display: flex; gap: 1.5rem; list-style: none; }
+.footer-links a {
+  font-size: 0.72rem; color: rgba(255,255,255,0.25);
+  text-decoration: none; letter-spacing: 0.06em;
+  text-transform: uppercase; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+footer .copy {
+  font-size: 0.72rem; color: rgba(255,255,255,0.2);
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .section { padding: 3.5rem 1.5rem; }
+  .page-header { padding: 4rem 1.5rem 3rem; }
+  footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+}

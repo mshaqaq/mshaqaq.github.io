@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — iMSS Group</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.pub-filters {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+.filter-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.45rem 1rem;
+  background: transparent; border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer; transition: all 0.2s;
+}
+.filter-btn.active, .filter-btn:hover {
+  border-color: var(--gold); color: var(--gold);
+  background: rgba(201,168,76,0.05);
+}
+
+.pub-entry {
+  display: grid; grid-template-columns: 56px 1fr;
+  gap: 1.5rem; padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.pub-entry.visible { opacity: 1; transform: none; }
+
+.pub-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem; color: var(--gold);
+  padding-top: 0.25rem;
+}
+
+.pub-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem; font-weight: 500;
+  color: var(--navy); margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+.pub-authors { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.25rem; }
+
+.pub-journal {
+  font-size: 0.82rem; color: var(--teal);
+  font-style: italic; margin-bottom: 0.6rem;
+}
+
+.pub-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.pub-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.25rem 0.7rem;
+  border: 1px solid var(--border); color: var(--muted);
+  text-decoration: none; transition: all 0.2s;
+}
+.pub-link:hover { border-color: var(--navy); color: var(--navy); }
+
+.pub-badge {
+  font-size: 0.65rem; padding: 0.2rem 0.6rem;
+  background: rgba(29,158,117,0.08);
+  border: 1px solid rgba(29,158,117,0.25);
+  color: var(--teal);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">i<span>MSS</span> Group</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html" class="active">Publications</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="eyebrow">iMSS Group</div>
+  <h1>Publications</h1>
+  <p>Journal articles and conference papers from the group and from prior work by the PI.</p>
+</div>
+
+<section class="section section-white">
+
+  <div class="pub-filters">
+    <button class="filter-btn active" onclick="filter('all', this)">All</button>
+    <button class="filter-btn" onclick="filter('2023', this)">2023</button>
+    <button class="filter-btn" onclick="filter('2022', this)">2022</button>
+    <button class="filter-btn" onclick="filter('2021', this)">2021</button>
+  </div>
+
+  <div id="pub-list">
+
+    <div class="pub-entry" data-year="2023">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">Digital programming of reciprocity breaking in resonant piezoelectric metamaterials</div>
+        <div class="pub-authors">M. AlShaqaq, C. Sugino, A. Erturk</div>
+        <div class="pub-journal">Physical Review Research, 5, 043003</div>
+        <div style="margin-bottom:0.6rem">
+          <span class="pub-badge">ASME Adaptive Structures Best Paper Award 2024</span>
+        </div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://doi.org/10.1103/PhysRevResearch.5.043003" target="_blank">DOI</a>
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">BibTeX</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-entry" data-year="2022">
+      <div class="pub-year">2022</div>
+      <div>
+        <div class="pub-title">Spatially programmable wave compression and signal enhancement in a piezoelectric metamaterial waveguide</div>
+        <div class="pub-authors">C. Sugino, M. AlShaqaq, A. Erturk</div>
+        <div class="pub-journal">Physical Review B, 106, 174304</div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://doi.org/10.1103/PhysRevB.106.174304" target="_blank">DOI</a>
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">BibTeX</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-entry" data-year="2022">
+      <div class="pub-year">2022</div>
+      <div>
+        <div class="pub-title">Programmable rainbow trapping and band-gap enhancement via spatial group-velocity tailoring in elastic metamaterials</div>
+        <div class="pub-authors">M. AlShaqaq, C. Sugino, A. Erturk</div>
+        <div class="pub-journal">Physical Review Applied, 17, L021003</div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://doi.org/10.1103/PhysRevApplied.17.L021003" target="_blank">DOI</a>
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">BibTeX</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-entry" data-year="2021">
+      <div class="pub-year">2021</div>
+      <div>
+        <div class="pub-title">Graded multifunctional piezoelectric metastructures for wideband vibration attenuation and energy harvesting</div>
+        <div class="pub-authors">M. AlShaqaq, A. Erturk</div>
+        <div class="pub-journal">Smart Materials and Structures, 30, 015029</div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://doi.org/10.1088/1361-665X/abc7fa" target="_blank">DOI</a>
+          <a class="pub-link" href="#">PDF</a>
+          <a class="pub-link" href="#">BibTeX</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <a class="footer-logo" href="index.html">i<span>MSS</span> Group</a>
+  <ul class="footer-links">
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p class="copy">© 2025 Mustafa AlShaqaq · KFUPM</p>
+</footer>
+
+<script>
+function filter(year, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pub-entry').forEach(el=>{
+    el.style.display = (year==='all' || el.dataset.year===year) ? 'grid' : 'none';
+  });
+}
+
+const obs = new IntersectionObserver(es=>es.forEach((e,i)=>{
+  if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*80);
+}),{threshold:0.08});
+document.querySelectorAll('.pub-entry').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

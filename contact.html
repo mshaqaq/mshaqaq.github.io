@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — iMSS Group</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: start;
+}
+
+.contact-info { }
+
+.info-block { margin-bottom: 2.5rem; }
+.info-block-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.info-block p {
+  font-size: 0.92rem; line-height: 1.75;
+  color: var(--muted);
+}
+.info-block a {
+  color: var(--navy); text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.2s;
+}
+.info-block a:hover { border-color: var(--gold); }
+
+.contact-form {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+}
+
+.form-group { margin-bottom: 1.5rem; }
+.form-label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.form-input, .form-textarea {
+  width: 100%; padding: 0.75rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem; color: var(--text);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  outline: none; transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--navy);
+}
+.form-textarea { resize: vertical; min-height: 130px; }
+
+.form-note {
+  font-size: 0.78rem; color: var(--muted);
+  margin-top: 0.4rem; line-height: 1.5;
+}
+
+.form-submit {
+  width: 100%; padding: 0.85rem;
+  background: var(--navy); color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  border: none; cursor: pointer;
+  transition: background 0.2s;
+}
+.form-submit:hover { background: var(--navy-light); }
+
+#form-success {
+  display: none; padding: 1rem;
+  background: rgba(29,158,117,0.08);
+  border: 1px solid rgba(29,158,117,0.2);
+  color: var(--teal); font-size: 0.88rem;
+  margin-top: 1rem; text-align: center;
+}
+
+@media(max-width:800px){
+  .contact-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">i<span>MSS</span> Group</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="teaching.html">Teaching</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="eyebrow">iMSS Group</div>
+  <h1>Contact</h1>
+  <p>Questions about research, openings, or collaborations — feel free to get in touch.</p>
+</div>
+
+<section class="section section-white">
+  <div class="contact-grid">
+
+    <div class="contact-info reveal">
+
+      <div class="info-block">
+        <div class="info-block-label">Email</div>
+        <p><a href="mailto:malshaqaq@kfupm.edu.sa">malshaqaq@kfupm.edu.sa</a></p>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">Office</div>
+        <p>
+          Building 63<br>
+          Room 310<br>
+          Dept. of Mechanical Engineering<br>
+          KFUPM, Dhahran 31261<br>
+          Saudi Arabia
+        </p>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">Office Hours</div>
+        <p>
+          11:00 am - 11:50 am (UMTW)<br>
+          Or by appointment via email.
+        </p>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">Prospective students</div>
+        <p>
+          If you are interested in joining the group, please include 
+          your CV and a short note about your research interests. 
+          See the <a href="people.html">People</a> page for current openings.
+        </p>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">Collaborations</div>
+        <p>
+          We are open to collaborations with researchers working on 
+          related problems in wave mechanics, smart materials, or 
+          structural dynamics.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="contact-form reveal">
+      <form id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input class="form-input" type="text" required placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" required placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input class="form-input" type="text" required placeholder="e.g. PhD inquiry, collaboration, ...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" required placeholder="Write your message here..."></textarea>
+          <p class="form-note">This form opens your email client. Alternatively, email directly: malshaqaq@kfupm.edu.sa</p>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+        <div id="form-success">Message prepared — your email client should open shortly.</div>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <a class="footer-logo" href="index.html">i<span>MSS</span> Group</a>
+  <ul class="footer-links">
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p class="copy">© 2025 Mustafa AlShaqaq · KFUPM</p>
+</footer>
+
+<script>
+function handleSubmit(e){
+  e.preventDefault();
+  const f = e.target;
+  const name    = f.querySelector('input[type=text]').value;
+  const email   = f.querySelector('input[type=email]').value;
+  const subject = f.querySelectorAll('input[type=text]')[1].value;
+  const msg     = f.querySelector('textarea').value;
+  const body    = encodeURIComponent(`From: ${name} (${email})\n\n${msg}`);
+  window.location.href = `mailto:malshaqaq@kfupm.edu.sa?subject=${encodeURIComponent(subject)}&body=${body}`;
+  document.getElementById('form-success').style.display = 'block';
+}
+
+const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
