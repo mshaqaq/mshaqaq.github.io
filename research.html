@@ -14,17 +14,14 @@
 .project:last-child { border-bottom: none; }
 .project:nth-child(even) { direction: rtl; }
 .project:nth-child(even) > * { direction: ltr; }
-
 .proj-fig {
-  background: var(--cream);
-  border: 1px solid var(--border);
+  background: var(--cream); border: 1px solid var(--border);
   aspect-ratio: 4/3;
   display: flex; align-items: center; justify-content: center;
   font-family: 'Poppins', sans-serif;
   font-size: 0.7rem; color: var(--muted);
   text-align: center; padding: 1.5rem;
 }
-
 .proj-num {
   font-family: 'Poppins', sans-serif;
   font-size: 0.68rem; color: var(--gold);
@@ -32,9 +29,8 @@
 }
 .proj-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.5rem; font-weight: 500;
-  color: var(--navy); margin-bottom: 1rem;
-  line-height: 1.25;
+  font-size: 1.35rem; font-weight: 600;
+  color: var(--navy); margin-bottom: 1rem; line-height: 1.25;
 }
 .proj-body p {
   font-size: 0.9rem; line-height: 1.8;
@@ -44,42 +40,47 @@
 .proj-pubs-label {
   font-family: 'Poppins', sans-serif;
   font-size: 0.65rem; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--gold);
-  margin-bottom: 0.6rem;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem;
 }
 .proj-pub-link {
   display: block; font-size: 0.82rem;
   color: var(--teal); text-decoration: none;
-  margin-bottom: 0.3rem; font-style: italic;
-  transition: color 0.2s;
+  margin-bottom: 0.3rem; font-style: italic; transition: color 0.2s;
 }
 .proj-pub-link:hover { color: var(--navy); }
 
-@media(max-width:800px){
-  .project, .project:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
+.interactive-cta {
+  background: var(--navy);
+  padding: 4rem;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 3rem; flex-wrap: wrap;
+}
+.interactive-cta-text h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem; font-weight: 600;
+  color: #fff; margin-bottom: 0.6rem;
+}
+.interactive-cta-text p {
+  font-size: 0.9rem; line-height: 1.75;
+  color: rgba(255,255,255,0.5); max-width: 480px;
+}
+
+@media(max-width:900px){
+  .project, .project:nth-child(even) { grid-template-columns:1fr; direction:ltr; }
+  .interactive-cta { padding: 3rem 1.5rem; flex-direction: column; }
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="index.html">i<span>MSS</span> Group</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="research.html" class="active">Research</a></li>
-    <li><a href="publications.html">Publications</a></li>
-    <li><a href="people.html">People</a></li>
-    <li><a href="teaching.html">Teaching</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
+<nav></nav>
 
 <div class="page-header">
   <div class="eyebrow">iMSS Group</div>
   <h1>Research</h1>
   <p>
-    Our work focuses on programmable piezoelectric metamaterials — how electrical circuits 
-    connected to periodic structures can reshape the way elastic waves propagate.
+    Our work focuses on programmable piezoelectric metamaterials — how electrical
+    circuits connected to periodic structures can reshape the way elastic waves propagate.
   </p>
 </div>
 
@@ -94,16 +95,16 @@
       <div class="proj-num">01 ── Wave Control</div>
       <div class="proj-title">Programmable rainbow trapping and band-gap engineering</div>
       <p>
-        In a uniform metamaterial, all unit cells are identical and the band gap is fixed. 
-        By gradually varying the resonant frequency of each unit cell's shunt circuit along 
-        the beam, we create a graded metamaterial where waves of different frequencies 
-        slow down and stop at different spatial positions.
+        In a uniform metamaterial, all unit cells are identical and the band gap is fixed.
+        By gradually varying the resonant frequency of each unit cell's shunt circuit
+        along the beam, we create a graded metamaterial where waves of different
+        frequencies slow down and stop at different spatial positions.
       </p>
       <p>
-        This effect — known as rainbow trapping in analogy with electromagnetics — allows 
-        precise spatial control over which frequencies are attenuated where. Using synthetic 
-        impedance circuits, the grading profile is entirely digital and can be changed 
-        without modifying any hardware.
+        This effect — known as rainbow trapping — allows precise spatial control over
+        which frequencies are attenuated where. Using synthetic impedance circuits,
+        the grading profile is entirely digital and can be changed without modifying
+        any hardware.
       </p>
       <div class="proj-pubs">
         <div class="proj-pubs-label">Related publications</div>
@@ -122,14 +123,14 @@
       <div class="proj-num">02 ── Sensing</div>
       <div class="proj-title">Spatially programmable wave compression and signal enhancement</div>
       <p>
-        When a wave's wavelength is compressed gradually along a waveguide, its energy 
-        concentrates — analogous to an acoustic black hole. We implement this using a 
-        piezoelectric metamaterial with a numerically optimized refractive index profile, 
+        When a wave's wavelength is compressed gradually along a waveguide, its energy
+        concentrates — analogous to an acoustic black hole. We implement this using a
+        piezoelectric metamaterial with a numerically optimized refractive index profile,
         loaded directly from a computer interface.
       </p>
       <p>
-        The result is a reconfigurable wave device that can amplify piezoelectric voltage 
-        output at a user-specified frequency and position — a step toward programmable 
+        The result is a reconfigurable wave device that can amplify piezoelectric voltage
+        output at a user-specified frequency and position — a step toward programmable
         elastic wave sensors that need no mechanical redesign between operating conditions.
       </p>
       <div class="proj-pubs">
@@ -148,14 +149,14 @@
       <div class="proj-num">03 ── Nonreciprocity</div>
       <div class="proj-title">Digitally programmed reciprocity breaking</div>
       <p>
-        Reciprocity is a fundamental property of linear time-invariant media — waves 
-        propagate identically in both directions. Breaking it requires either nonlinearity, 
-        moving parts, or time-varying properties.
+        Reciprocity is a fundamental property of linear time-invariant media — waves
+        propagate identically in both directions. Breaking it requires either
+        nonlinearity, moving parts, or time-varying properties.
       </p>
       <p>
-        We use the third approach: by modulating the inductance of each shunt circuit 
-        in both space and time, we create a traveling-wave modulation that breaks the 
-        symmetry of the dispersion relation. The result is a directional band gap — a 
+        We use the third approach: by modulating the inductance of each shunt circuit
+        in both space and time, we create a traveling-wave modulation that breaks the
+        symmetry of the dispersion relation. The result is a directional band gap — a
         frequency range blocked in one direction but open in the other.
       </p>
       <div class="proj-pubs">
@@ -167,19 +168,29 @@
 
 </section>
 
-<footer>
-  <a class="footer-logo" href="index.html">i<span>MSS</span> Group</a>
-  <ul class="footer-links">
-    <li><a href="research.html">Research</a></li>
-    <li><a href="publications.html">Publications</a></li>
-    <li><a href="people.html">People</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <p class="copy">© 2025 Mustafa AlShaqaq · KFUPM</p>
-</footer>
+<!-- CTA to interactive page -->
+<div class="interactive-cta">
+  <div class="interactive-cta-text">
+    <h3>Explore the physics interactively</h3>
+    <p>
+      We have built live browser-based models from our published work — adjust
+      parameters and see results in real time, directly from the underlying theory.
+      No installation required.
+    </p>
+  </div>
+  <a href="interactive.html" class="btn btn-gold">Open interactive demos</a>
+</div>
+
+<footer></footer>
+
+<script src="/components.js"></script>
+
 
 <script>
-const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.08});
+const obs = new IntersectionObserver(
+  es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }),
+  {threshold:0.08}
+);
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>

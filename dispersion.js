@@ -174,5 +174,6 @@
   // ── Initial draw + resize handler ──
   draw();
   window.addEventListener('resize', draw);
+  window.dispRedraw = draw;
 
 })();
