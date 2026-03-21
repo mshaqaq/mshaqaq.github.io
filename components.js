@@ -1,7 +1,5 @@
 // ── iMSS Group — shared components ──
-// Loads nav.html and footer.html into <nav> and <footer> on every page.
-// Handles hamburger menu toggle on mobile.
-// To add a new page to the nav: edit nav.html only.
+// Loads nav.html and footer.html, wires hamburger menu on mobile.
 
 (async function () {
 
@@ -20,7 +18,6 @@
         if (href === path) a.classList.add('active');
       });
 
-      // Wire hamburger toggle after nav is injected
       if (selector === 'nav') wireHamburger();
 
     } catch (e) {
@@ -33,12 +30,20 @@
     const links = document.getElementById('nav-links');
     if (!btn || !links) return;
 
-    btn.addEventListener('click', () => {
+    // Use touchend for faster mobile response, fallback to click
+    function toggle(e) {
+      e.stopPropagation();
       btn.classList.toggle('open');
       links.classList.toggle('open');
+    }
+
+    btn.addEventListener('click', toggle);
+    btn.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      toggle(e);
     });
 
-    // Close menu when any nav link is clicked
+    // Close when a link is tapped
     links.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         btn.classList.remove('open');
@@ -46,7 +51,7 @@
       });
     });
 
-    // Close menu when clicking outside the nav
+    // Close when tapping outside the nav
     document.addEventListener('click', e => {
       const nav = document.querySelector('nav');
       if (nav && !nav.contains(e.target)) {
