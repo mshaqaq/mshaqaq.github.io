@@ -1,6 +1,6 @@
 /* ─── iMSS Group — Shared Stylesheet ─── */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
 
 :root {
   --navy:       #0B2545;
@@ -19,7 +19,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   background: var(--cream);
   color: var(--text);
   overflow-x: hidden;
@@ -37,7 +37,7 @@ nav {
 }
 
 .nav-logo {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size: 1.35rem; color: #fff;
   text-decoration: none;
 }
@@ -60,7 +60,7 @@ nav {
 }
 
 .page-header .eyebrow {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Mono', monospace;
   font-size: 0.68rem; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--gold);
   margin-bottom: 1rem;
@@ -72,7 +72,7 @@ nav {
 }
 
 .page-header h1 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 500; color: #fff;
   line-height: 1.15;
@@ -92,9 +92,8 @@ nav {
 .section-navy  { background: var(--navy); }
 
 .section-label {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.0rem; letter-spacing: 0.14em;
-  font-weight: 300px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--gold);
   margin-bottom: 0.75rem;
   display: flex; align-items: center; gap: 0.75rem;
@@ -105,9 +104,9 @@ nav {
 }
 
 .section-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size: clamp(1.8rem, 3vw, 2.6rem);
-  font-weight: 600; line-height: 1.15;
+  font-weight: 500; line-height: 1.2;
   color: var(--navy); margin-bottom: 0.75rem;
 }
 .section-navy .section-title { color: #fff; }
@@ -153,7 +152,7 @@ footer {
   align-items: center; flex-wrap: wrap; gap: 1rem;
 }
 .footer-logo {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'EB Garamond', serif;
   font-size: 1.1rem; color: rgba(255,255,255,0.35);
   text-decoration: none;
 }
@@ -177,9 +176,56 @@ footer .copy {
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ─── RESPONSIVE ─── */
+/* ── Hamburger button ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 110;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+/* Animated X when open */
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 @media (max-width: 900px) {
   nav { padding: 0 1.5rem; }
-  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 64px; left: 0; right: 0;
+    background: rgba(11,37,69,0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem 0 1rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    z-index: 99;
+    list-style: none;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block;
+    padding: 0.85rem 2rem;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-links a:hover { color: var(--gold); background: rgba(255,255,255,0.03); }
   .section { padding: 3.5rem 1.5rem; }
   .page-header { padding: 4rem 1.5rem 3rem; }
   footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
