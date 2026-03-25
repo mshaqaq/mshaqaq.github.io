@@ -1,179 +1,254 @@
-// ── iMSS Group — Dispersion Plot ──
-// dispersion.js: handles the interactive piezoelectric metamaterial
-// dispersion curve on the home page.
-// Depends on: a <canvas id="disp-canvas"> element in the DOM.
+(function () {
+  const canvas = document.getElementById('dispersionCanvas');
+  if (!canvas) return;
 
-(function() {
+  const ctx = canvas.getContext('2d');
+  const wtInput = document.getElementById('dispWt');
+  const alphaInput = document.getElementById('dispAlpha');
+  const zetaInput = document.getElementById('dispZeta');
+  const wtVal = document.getElementById('dispWtVal');
+  const alphaVal = document.getElementById('dispAlphaVal');
+  const zetaVal = document.getElementById('dispZetaVal');
 
-  const dc = document.getElementById('disp-canvas');
-  if (!dc) return;
-  const dx = dc.getContext('2d');
+  let W = 0;
+  let H = 0;
+  let dpr = 1;
 
-  let wt = 1.0, al = 0.15, ze = 0.0;
+  function getColors() {
+    const dark = document.body.classList.contains('dark');
+    return dark
+      ? {
+          bg: '#09090b',
+          grid: 'rgba(161,161,170,0.12)',
+          axis: 'rgba(228,228,231,0.82)',
+          text: 'rgba(244,244,245,0.96)',
+          muted: 'rgba(212,212,216,0.74)',
+          band: 'rgba(245,230,120,0.18)',
+          bandStroke: 'rgba(245,230,120,0.50)',
+          ref: 'rgba(161,161,170,0.72)',
+          curve: 'rgba(255,255,255,0.94)',
+        }
+      : {
+          bg: '#ffffff',
+          grid: 'rgba(82,82,91,0.12)',
+          axis: 'rgba(39,39,42,0.82)',
+          text: 'rgba(24,24,27,0.95)',
+          muted: 'rgba(82,82,91,0.75)',
+          band: 'rgba(245,230,120,0.28)',
+          bandStroke: 'rgba(185,160,55,0.64)',
+          ref: 'rgba(113,113,122,0.72)',
+          curve: 'rgba(0,0,0,0.92)',
+        };
+  }
 
-  // ── Complex number helpers ──
   function cdiv(a, b) {
-    const d = b.re*b.re + b.im*b.im;
-    return { re: (a.re*b.re + a.im*b.im)/d,
-             im: (a.im*b.re - a.re*b.im)/d };
+    const d = b.re * b.re + b.im * b.im;
+    return {
+      re: (a.re * b.re + a.im * b.im) / d,
+      im: (a.im * b.re - a.re * b.im) / d,
+    };
   }
+
   function csqrt(a) {
-    const r = Math.sqrt(a.re*a.re + a.im*a.im);
+    const r = Math.hypot(a.re, a.im);
     const t = Math.atan2(a.im, a.re);
-    return { re: Math.sqrt(r)*Math.cos(t/2),
-             im: Math.sqrt(r)*Math.sin(t/2) };
+    return {
+      re: Math.sqrt(r) * Math.cos(t / 2),
+      im: Math.sqrt(r) * Math.sin(t / 2),
+    };
   }
 
-  // ── Damped dispersion: sweep ω → complex k ──
-  function dampedK(omega, wt, al, ze) {
-    const eps = ze < 1e-9 ? 1e-9 : ze;
-    const h = cdiv(
-      { re: wt*wt, im: 0 },
-      { re: wt*wt - omega*omega, im: 2*eps*wt*omega }
-    );
-    const k2 = { re: omega*omega*(1 + al*h.re),
-                 im: omega*omega*al*h.im };
-    return csqrt(k2);
+  function initCanvasSize() {
+    dpr = window.devicePixelRatio || 1;
+    W = canvas.clientWidth || 700;
+    H = Number(canvas.getAttribute('height')) || 420;
+
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.width = '100%';
+    canvas.style.height = H + 'px';
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
   }
 
-  // ── Main draw function ──
-  function draw() {
-    const W   = dc.offsetWidth || 600;
-    const dpr = window.devicePixelRatio || 1;
-    dc.width  = W   * dpr;
-    dc.height = 420 * dpr;
-    dx.scale(dpr, dpr);
+  function drawDispersion() {
+    const C = getColors();
+    const wt = Number(wtInput.value);
+    const alpha = Number(alphaInput.value);
+    const zeta = Number(zetaInput.value);
 
-    const DW = W, DH = 420;
-    const P  = { t: 36, r: 36, b: 60, l: 68 };
-    const PW = DW - P.l - P.r;
-    const PH = DH - P.t - P.b;
-    const maxK = 1, maxW = 2.4;
+    wtVal.textContent = wt.toFixed(2);
+    alphaVal.textContent = alpha.toFixed(2);
+    zetaVal.textContent = zeta.toFixed(3);
 
-    dx.clearRect(0, 0, DW, DH);
+    const P = { l: 66, r: 28, t: 30, b: 56 };
+    const PW = W - P.l - P.r;
+    const PH = H - P.t - P.b;
+    const maxK = 1.0;
+    const maxOm = 2.4;
 
-    // ── Grid ──
-    dx.strokeStyle = 'rgba(255,255,255,0.05)';
-    dx.lineWidth = 1;
+    const xMap = (kNorm) => P.l + (kNorm / maxK) * PW;
+    const yMap = (om) => P.t + PH - (om / maxOm) * PH;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = C.grid;
+    ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
-      const gx = P.l + (i/4)*PW;
-      const gy = P.t + (i/4)*PH;
-      dx.beginPath(); dx.moveTo(gx, P.t);   dx.lineTo(gx, P.t+PH); dx.stroke();
-      dx.beginPath(); dx.moveTo(P.l, gy);   dx.lineTo(P.l+PW, gy); dx.stroke();
+      const gx = P.l + (i / 4) * PW;
+      const gy = P.t + (i / 4) * PH;
+      ctx.beginPath();
+      ctx.moveTo(gx, P.t);
+      ctx.lineTo(gx, P.t + PH);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(P.l, gy);
+      ctx.lineTo(P.l + PW, gy);
+      ctx.stroke();
     }
 
-    // ── Band gap shading ──
-    // Lower edge: ωt       (lower branch asymptote as k→∞)
-    // Upper edge: ωt√(1+α) (upper branch start at k=0)
-    const bgLow  = wt;
-    const bgHigh = wt * Math.sqrt(1 + al);
+    const bandLow = wt;
+    const bandHigh = wt * Math.sqrt(1 + alpha);
+    const yBottom = yMap(Math.min(bandLow, maxOm));
+    const yTop = yMap(Math.min(bandHigh, maxOm));
+    if (bandLow < maxOm) {
+      ctx.fillStyle = C.band;
+      ctx.fillRect(P.l, yTop, PW, Math.max(0, yBottom - yTop));
+      ctx.setLineDash([5, 5]);
+      ctx.strokeStyle = C.bandStroke;
+      [yTop, yBottom].forEach((y) => {
+        ctx.beginPath();
+        ctx.moveTo(P.l, y);
+        ctx.lineTo(P.l + PW, y);
+        ctx.stroke();
+      });
+      ctx.setLineDash([]);
+      ctx.fillStyle = C.muted;
+      ctx.font = '12px Poppins, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText('band gap', P.l + PW - 8, (yTop + yBottom) / 2 + 4);
+    }
 
-    const yBottom = P.t + PH - (bgLow  / maxW) * PH;
-    const yTop    = P.t + PH - (bgHigh / maxW) * PH;
-
-    dx.fillStyle = 'rgba(29,158,117,0.13)';
-    dx.fillRect(P.l, yTop, PW, yBottom - yTop);
-
-    dx.setLineDash([5, 5]);
-    dx.strokeStyle = 'rgba(29,158,117,0.35)';
-    dx.lineWidth = 1;
-    [yTop, yBottom].forEach(y => {
-      dx.beginPath(); dx.moveTo(P.l, y); dx.lineTo(P.l+PW, y); dx.stroke();
-    });
-    dx.setLineDash([]);
-
-    dx.fillStyle  = 'rgba(29,158,117,0.7)';
-    dx.font       = '12px Poppins, sans-serif';
-    dx.textAlign  = 'right';
-    dx.fillText('band gap', P.l + PW - 8, (yTop + yBottom)/2 + 4);
-
-    // ── Short-circuit (reference) branch ──
-    dx.beginPath();
-    dx.strokeStyle = 'rgba(255,255,255,0.22)';
-    dx.lineWidth   = 1.8;
+    ctx.beginPath();
+    ctx.setLineDash([8, 6]);
+    ctx.strokeStyle = C.ref;
+    ctx.lineWidth = 1.8;
     for (let i = 0; i <= 300; i++) {
-      const k = (i/300) * maxK;
-      const w = k * Math.PI;
-      if (w > maxW) break;
-      const x = P.l + (k/maxK)*PW;
-      const y = P.t + PH - (w/maxW)*PH;
-      i === 0 ? dx.moveTo(x, y) : dx.lineTo(x, y);
+      const kNorm = (i / 300) * maxK;
+      const om = kNorm * Math.PI;
+      if (om > maxOm) break;
+      const x = xMap(kNorm);
+      const y = yMap(om);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     }
-    dx.stroke();
+    ctx.stroke();
+    ctx.setLineDash([]);
 
-    // ── Damped dispersion curve ──
-    let prevX = null, prevY = null;
-    dx.lineWidth = 2.5;
-    for (let i = 1; i <= 800; i++) {
-      const omega  = (i/800) * maxW;
-      const k      = dampedK(omega, wt, al, ze);
-      const kNorm  = k.re / Math.PI;
-      if (kNorm < 0 || kNorm > maxK) { prevX = null; continue; }
-      const px   = P.l + (kNorm/maxK) * PW;
-      const py   = P.t + PH - (omega/maxW) * PH;
-      const fade = Math.max(0.08, 1 - Math.min(k.im * 5, 0.92));
-      if (prevX !== null && Math.abs(py - prevY) < 25) {
-        dx.beginPath();
-        dx.strokeStyle = `rgba(201,168,76,${fade.toFixed(2)})`;
-        dx.moveTo(prevX, prevY);
-        dx.lineTo(px, py);
-        dx.stroke();
+    function dampedK(om) {
+      const eps = Math.max(zeta, 1e-9);
+      const h = cdiv(
+        { re: wt * wt, im: 0 },
+        { re: wt * wt - om * om, im: 2 * eps * wt * om }
+      );
+      const k2 = {
+        re: om * om * (1 + alpha * h.re),
+        im: om * om * alpha * h.im,
+      };
+      return csqrt(k2);
+    }
+
+    ctx.beginPath();
+    ctx.strokeStyle = C.curve;
+    ctx.lineWidth = 2.0;
+
+    let penDown = false;
+    let prevX = null;
+    let prevY = null;
+
+    for (let i = 1; i <= 1200; i++) {
+      const om = (i / 1200) * maxOm;
+      const k = dampedK(om);
+      const kNorm = k.re / Math.PI;
+
+      if (!Number.isFinite(kNorm) || !Number.isFinite(k.im) || kNorm < 0 || kNorm > maxK) {
+        penDown = false;
+        prevX = null;
+        prevY = null;
+        continue;
       }
-      prevX = px; prevY = py;
+
+      const x = xMap(kNorm);
+      const y = yMap(om);
+      if (!Number.isFinite(x) || !Number.isFinite(y)) {
+        penDown = false;
+        prevX = null;
+        prevY = null;
+        continue;
+      }
+
+      if (prevX !== null) {
+        const dx = Math.abs(x - prevX);
+        const dy = Math.abs(y - prevY);
+        if (dx > 14 || dy > 10) {
+          penDown = false;
+        }
+      }
+
+      if (!penDown) {
+        ctx.moveTo(x, y);
+        penDown = true;
+      } else {
+        ctx.lineTo(x, y);
+      }
+
+      prevX = x;
+      prevY = y;
     }
+    ctx.stroke();
 
-    // ── Axes ──
-    dx.strokeStyle = 'rgba(255,255,255,0.22)';
-    dx.lineWidth   = 1;
-    dx.beginPath();
-    dx.moveTo(P.l, P.t);
-    dx.lineTo(P.l, P.t + PH);
-    dx.lineTo(P.l + PW, P.t + PH);
-    dx.stroke();
+    ctx.strokeStyle = C.axis;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(P.l, P.t);
+    ctx.lineTo(P.l, P.t + PH);
+    ctx.lineTo(P.l + PW, P.t + PH);
+    ctx.stroke();
 
-    // ── Axis labels ──
-    dx.fillStyle  = 'rgba(255,255,255,0.5)';
-    dx.font       = '13px Poppins, sans-serif';
-    dx.textAlign  = 'center';
-    dx.fillText('Wave number  ka/\u03C0', P.l + PW/2, DH - 10);
+    ctx.fillStyle = C.text;
+    ctx.font = '13px Poppins, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Wave number  ka/π', P.l + PW / 2, H - 14);
 
-    dx.save();
-    dx.translate(16, P.t + PH/2);
-    dx.rotate(-Math.PI / 2);
-    dx.fillText('Frequency  \u03C9/\u03C9\u2080', 0, 0);
-    dx.restore();
+    ctx.save();
+    ctx.translate(18, P.t + PH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('Frequency  ω/ω₀', 0, 0);
+    ctx.restore();
 
-    // ── Tick labels ──
-    dx.font = '12px Poppins, sans-serif';
+    ctx.font = '12px Poppins, sans-serif';
     for (let i = 0; i <= 4; i++) {
-      dx.textAlign = 'center';
-      dx.fillText((i * 0.25).toFixed(2),
-        P.l + (i/4)*PW, P.t + PH + 20);
-      dx.textAlign = 'right';
-      dx.fillText((i * maxW/4).toFixed(1),
-        P.l - 10, P.t + PH - (i/4)*PH + 4);
+      ctx.textAlign = 'center';
+      ctx.fillText((i * 0.25).toFixed(2), P.l + (i / 4) * PW, P.t + PH + 24);
+      ctx.textAlign = 'right';
+      ctx.fillText(((i * maxOm) / 4).toFixed(1), P.l - 10, P.t + PH - (i / 4) * PH + 4);
     }
   }
 
-  // ── Slider wiring ──
-  function wire(id, valId, decimals, setter) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.addEventListener('input', e => {
-      setter(+e.target.value);
-      document.getElementById(valId).textContent =
-        (+e.target.value).toFixed(decimals);
-      draw();
-    });
-  }
+  window.drawDispersion = drawDispersion;
+  window.refreshDispersionCanvas = function () {
+    initCanvasSize();
+    drawDispersion();
+  };
 
-  wire('disp-wt', 'disp-wt-val', 2, v => { wt = v; });
-  wire('disp-al', 'disp-al-val', 2, v => { al = v; });
-  wire('disp-ze', 'disp-ze-val', 3, v => { ze = v; });
+  ['input', 'change'].forEach((evt) => {
+    wtInput.addEventListener(evt, drawDispersion);
+    alphaInput.addEventListener(evt, drawDispersion);
+    zetaInput.addEventListener(evt, drawDispersion);
+  });
 
-  // ── Initial draw + resize handler ──
-  draw();
-  window.addEventListener('resize', draw);
-  window.dispRedraw = draw;
-
+  initCanvasSize();
+  drawDispersion();
 })();

@@ -1,541 +1,499 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>iMSS Group — KFUPM</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-<style>
-body { padding-top: 0; }
-
-.hero {
-  position: relative; height: 100vh; min-height: 680px;
-  display: flex; align-items: center;
-  overflow: hidden; background: var(--navy);
-}
-#wave-canvas {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; opacity: 0.55;
-}
-.hero-content {
-  position: relative; z-index: 2;
-  padding: 0 4rem; max-width: 680px;
-  opacity: 0; transform: translateY(30px);
-  animation: fadeUp 0.9s 0.3s forwards;
-}
-.hero-eyebrow {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.7rem; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--gold);
-  margin-bottom: 1.5rem;
-  display: flex; align-items: center; gap: 1rem;
-}
-.hero-eyebrow::before {
-  content: ''; display: block;
-  width: 32px; height: 1px; background: var(--gold);
-}
-.hero-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(2.4rem, 5vw, 3.8rem);
-  font-weight: 600; line-height: 1.1;
-  color: #fff; margin-bottom: 1.5rem;
-}
-.hero-title em { font-style: italic; color: var(--gold-light); font-weight: 400; }
-.hero-desc {
-  font-size: 1rem; font-weight: 300;
-  line-height: 1.8; color: rgba(255,255,255,0.6);
-  max-width: 500px; margin-bottom: 2.5rem;
-}
-.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-.hero-scroll {
-  position: absolute; bottom: 2.5rem; left: 4rem;
-  display: flex; align-items: center; gap: 0.75rem;
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.65rem; letter-spacing: 0.14em;
-  text-transform: uppercase; color: rgba(255,255,255,0.3);
-  z-index: 2; opacity: 0;
-  animation: fadeUp 1s 1.2s forwards;
-}
-.scroll-line {
-  width: 1px; height: 36px;
-  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3));
-}
-
-.about-grid {
-  display: grid; grid-template-columns: 1.1fr 0.9fr;
-  gap: 5rem; align-items: start;
-}
-.about-text p {
-  font-size: 1rem; line-height: 1.85;
-  color: var(--muted); margin-bottom: 1.1rem;
-}
-.about-text p strong { color: var(--navy); font-weight: 500; }
-.about-info { background: var(--cream); border: 1px solid var(--border); padding: 2rem; }
-.info-row {
-  display: flex; gap: 1rem; padding: 0.9rem 0;
-  border-bottom: 1px solid var(--border); align-items: flex-start;
-}
-.info-row:last-child { border-bottom: none; }
-.info-key {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.68rem; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--gold);
-  min-width: 90px; padding-top: 0.1rem;
-}
-.info-val { font-size: 0.88rem; line-height: 1.55; color: var(--muted); }
-
-.research-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5px; background: var(--border);
-  border: 1px solid var(--border); margin-top: 2.5rem;
-}
-.rc {
-  background: var(--white); padding: 2.25rem;
-  position: relative; overflow: hidden; transition: transform 0.3s;
-}
-.rc::after {
-  content: ''; position: absolute; bottom: 0; left: 0;
-  width: 100%; height: 2px; background: var(--gold);
-  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
-}
-.rc:hover { transform: translateY(-3px); }
-.rc:hover::after { transform: scaleX(1); }
-.rc-num {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.62rem; color: rgba(201,168,76,0.7);
-  letter-spacing: 0.1em; margin-bottom: 1.25rem;
-}
-.rc-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.1rem; font-weight: 600;
-  color: var(--navy); margin-bottom: 0.6rem; line-height: 1.3;
-}
-.rc-desc { font-size: 0.85rem; line-height: 1.7; color: var(--muted); }
-
-/* ── Dispersion section ── */
-.disp-section { background: var(--navy); padding: 6rem 4rem; }
-.disp-layout {
-  display: grid; grid-template-columns: 1fr 1.4fr;
-  gap: 4rem; align-items: start; margin-top: 2.5rem;
-}
-.disp-text p {
-  font-size: 0.92rem; line-height: 1.8;
-  color: rgba(255,255,255,0.55); margin-bottom: 1.5rem;
-}
-.ctrl { margin-bottom: 1.5rem; }
-.ctrl-row {
-  display: flex; justify-content: space-between;
-  align-items: baseline; margin-bottom: 0.5rem;
-}
-.ctrl-name {
-  font-size: 0.88rem; color: rgba(255,255,255,0.5);
-  display: flex; align-items: baseline; gap: 0.4rem;
-}
-.ctrl-name .katex { font-size: 0.95rem; color: rgba(255,255,255,0.7); }
-.ctrl-val {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.88rem; font-weight: 500;
-  color: var(--gold); min-width: 48px; text-align: right;
-}
-input[type=range] {
-  width: 100%; -webkit-appearance: none;
-  height: 2px; background: rgba(255,255,255,0.12);
-  outline: none; cursor: pointer;
-}
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none; width: 14px; height: 14px;
-  border-radius: 50%; background: var(--gold); cursor: pointer;
-  transition: transform 0.15s;
-}
-input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
-
-#disp-canvas {
-  width: 100%; height: 420px;
-  border: 1px solid rgba(255,255,255,0.07);
-  background: rgba(0,0,0,0.2);
-  display: block;
-}
-.disp-legend {
-  display: flex; gap: 1.5rem; margin-top: 0.85rem; flex-wrap: wrap;
-}
-.leg { display: flex; align-items: center; gap: 0.5rem;
-  font-size: 0.78rem; color: rgba(255,255,255,0.4); }
-.leg-line { width: 18px; height: 2px; }
-.leg .katex { font-size: 0.8rem; }
-
-/* ── Publications preview ── */
-.pub-preview { margin-top: 2.5rem; }
-.pub-item {
-  display: grid; grid-template-columns: 44px 1fr;
-  gap: 1.25rem; padding: 1.5rem 0;
-  border-bottom: 1px solid var(--border);
-  opacity: 0; transform: translateX(-16px);
-  transition: opacity 0.5s, transform 0.5s;
-}
-.pub-item.visible { opacity: 1; transform: none; }
-.pub-year {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.7rem; color: var(--gold); padding-top: 0.2rem;
-}
-.pub-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem; font-weight: 500;
-  color: var(--navy); margin-bottom: 0.25rem; line-height: 1.4;
-}
-.pub-meta { font-size: 0.78rem; color: var(--muted); }
-.pub-meta em { color: var(--teal); font-style: italic; }
-.pub-award {
-  display: inline-block; margin-top: 0.35rem;
-  font-size: 0.65rem; padding: 0.2rem 0.55rem;
-  border: 1px solid rgba(29,158,117,0.3);
-  color: var(--teal); background: rgba(29,158,117,0.07);
-}
-
-/* ── Join ── */
-.join-inner { max-width: 580px; margin: 0 auto; text-align: center; }
-.join-inner .section-label { justify-content: center; }
-.join-inner .section-label::before { display: none; }
-.join-inner .section-title { color: #fff; margin-bottom: 1rem; }
-.join-inner > p {
-  font-size: 0.95rem; line-height: 1.8;
-  color: rgba(255,255,255,0.5); margin-bottom: 2.5rem;
-}
-.join-slots {
-  display: flex; gap: 1px; background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.05);
-  margin-bottom: 2.5rem; text-align: left;
-}
-.slot { flex: 1; padding: 1.5rem; background: rgba(11,37,69,0.7); }
-.slot-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem; font-weight: 500;
-  color: var(--gold); margin-bottom: 0.3rem;
-}
-.slot p { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
-
-@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
-@media (max-width: 900px) {
-  .hero-content { padding: 0 1.5rem; }
-  .hero-scroll { left: 1.5rem; }
-  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .disp-section { padding: 4rem 1.5rem; }
-  .disp-layout { grid-template-columns: 1fr; }
-  .join-slots { flex-direction: column; }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mustafa AlShaqaq Research Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script> -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 </head>
-<body>
-
-<nav></nav>
-
-<!-- HERO -->
-<section class="hero">
-  <canvas id="wave-canvas"></canvas>
-  <div class="hero-content">
-    <div class="hero-eyebrow">KFUPM · Mechanical Engineering · Dhahran</div>
-    <h1 class="hero-title">
-      Intelligent Metamaterials<br>
-      &amp; <em>Smart Structures</em><br>Group
-    </h1>
-    <p class="hero-desc">
-      A research group at KFUPM studying programmable piezoelectric metamaterials —
-      how we engineer materials that control elastic waves in ways nature alone cannot.
-    </p>
-    <div class="hero-cta">
-      <a href="research.html" class="btn btn-gold">Our Research</a>
-      <a href="contact.html" class="btn btn-outline">Get in Touch</a>
-    </div>
-  </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    Scroll to explore
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="section section-white" id="about">
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <div class="section-label">About</div>
-      <h2 class="section-title">What we work on</h2>
-      <p>
-        The iMSS Group is a newly established research group in the
-        <strong>Department of Mechanical Engineering at KFUPM</strong>, also affiliated
-        with the Interdisciplinary Research Center for Intelligent Manufacturing and Robotics.
-      </p>
-      <p>
-        Our interest is in <strong>programmable piezoelectric metamaterials</strong> —
-        structures whose wave-propagation behavior can be tuned digitally by adjusting
-        electrical circuits connected to each unit cell. This opens up possibilities for
-        reconfigurable wave devices, vibration control systems, and energy harvesting applications.
-      </p>
-      <p>
-        We are at an early stage and actively building the group.
-        If the research sounds interesting to you, we would be glad to hear from you.
-      </p>
-    </div>
-    <div class="about-info reveal">
-      <div class="info-row">
-        <div class="info-key">PI</div>
-        <div class="info-val">Dr. Mustafa AlShaqaq<br>Assistant Professor</div>
-      </div>
-      <div class="info-row">
-        <div class="info-key">Dept.</div>
-        <div class="info-val">Mechanical Engineering, KFUPM</div>
-      </div>
-      <div class="info-row">
-        <div class="info-key">Affiliation</div>
-        <div class="info-val">IRC for Intelligent Manufacturing and Robotics</div>
-      </div>
-      <div class="info-row">
-        <div class="info-key">Location</div>
-        <div class="info-val">Dhahran, Eastern Province, Saudi Arabia</div>
-      </div>
-      <div class="info-row">
-        <div class="info-key">Email</div>
-        <div class="info-val">malshaqaq@kfupm.edu.sa</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- RESEARCH -->
-<section class="section section-cream" id="research">
-  <div class="reveal">
-    <div class="section-label">Research</div>
-    <h2 class="section-title">Current directions</h2>
-  </div>
-  <div class="research-grid">
-    <div class="rc reveal">
-      <div class="rc-num">01</div>
-      <div class="rc-title">Programmable Wave Control</div>
-      <p class="rc-desc">Using graded piezoelectric arrays with digitally tuned shunt circuits to trap, compress, and steer elastic waves along a waveguide.</p>
-    </div>
-    <div class="rc reveal">
-      <div class="rc-num">02</div>
-      <div class="rc-title">Nonreciprocal Propagation</div>
-      <p class="rc-desc">Spatiotemporal modulation of electrical impedance to break wave reciprocity — enabling elastic waves to travel preferentially in one direction.</p>
-    </div>
-    <div class="rc reveal">
-      <div class="rc-num">03</div>
-      <div class="rc-title">Energy Harvesting</div>
-      <p class="rc-desc">Graded metastructures that simultaneously attenuate vibrations and harvest the trapped energy through the direct piezoelectric effect.</p>
-    </div>
-    <div class="rc reveal">
-      <div class="rc-num">04</div>
-      <div class="rc-title">Smart Structures</div>
-      <p class="rc-desc">Digitally programmable resonant elastic metamaterials using synthetic impedance circuits that allow rapid reconfiguration without hardware changes.</p>
-    </div>
-  </div>
-</section>
-
-<!-- INTERACTIVE DISPERSION -->
-<section class="disp-section" id="explore">
-  <div class="section-label" style="color:var(--gold)">Interactive</div>
-  <h2 class="section-title" style="color:#fff">Dispersion in a piezoelectric metamaterial</h2>
-  <div class="disp-layout">
-
-    <div class="disp-text reveal">
-      <p>
-        The dispersion relation describes how elastic waves propagate through a periodic
-        metamaterial. When piezoelectric unit cells are shunted to inductive circuits,
-        a band gap opens near the shunt resonant frequency — a range of frequencies
-        where wave propagation is forbidden.
-      </p>
-      <p>
-        Adjust the sliders to see how the band gap responds to changes in parameters.
-        At \(\zeta = 0\) the edges are sharp; increasing \(\zeta\) softens them.
-      </p>
-
-      <div class="ctrl">
-        <div class="ctrl-row">
-          <span class="ctrl-name">Shunt resonant frequency \(\omega_t/\omega_0\)</span>
-          <span class="ctrl-val" id="disp-wt-val">1.00</span>
+<body class="dark">
+  <div class="container">
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <h1>Mustafa AlShaqaq</h1>
+          <p>Academic website · research group</p>
         </div>
-        <input type="range" id="disp-wt" min="0.4" max="1.6" step="0.01" value="1.0">
-      </div>
-
-      <div class="ctrl">
-        <div class="ctrl-row">
-          <span class="ctrl-name">Electromechanical coupling \(\alpha\)</span>
-          <span class="ctrl-val" id="disp-al-val">0.15</span>
-        </div>
-        <input type="range" id="disp-al" min="0.05" max="0.4" step="0.01" value="0.15">
-      </div>
-
-      <div class="ctrl">
-        <div class="ctrl-row">
-          <span class="ctrl-name">Damping ratio \(\zeta\)</span>
-          <span class="ctrl-val" id="disp-ze-val">0.000</span>
-        </div>
-        <input type="range" id="disp-ze" min="0" max="0.15" step="0.001" value="0">
-      </div>
-
-      <div class="disp-legend">
-        <div class="leg">
-          <div class="leg-line" style="background:var(--gold)"></div>
-          Shunted \((\zeta{=}0\) sharp, \(\zeta{>}0\) fades\())\)
-        </div>
-        <div class="leg">
-          <div class="leg-line" style="background:rgba(255,255,255,0.25)"></div>
-          Short-circuit
-        </div>
-        <div class="leg">
-          <div class="leg-line" style="background:var(--teal);height:8px;width:8px;border-radius:50%"></div>
-          Band gap \([\omega_t,\,\omega_t\sqrt{1+\alpha}]\)
+        <div class="nav-wrap">
+          <button class="menu-toggle" id="menuToggle">Menu</button>
+          <nav class="nav-links" id="navLinks">
+            <a href="#about">About</a>
+            <a href="#news">News</a>
+            <a href="#publications">Publications</a>
+            <a href="#projects">Projects</a>
+            <a href="#teaching">Teaching</a>
+            <a href="#interactive">Interactive</a>
+            <a href="#people">People</a>
+          </nav>
+            <button class="theme-toggle theme-icon-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2.5v2.2"></path>
+              <path d="M12 19.3v2.2"></path>
+              <path d="M4.93 4.93l1.56 1.56"></path>
+              <path d="M17.51 17.51l1.56 1.56"></path>
+              <path d="M2.5 12h2.2"></path>
+              <path d="M19.3 12h2.2"></path>
+              <path d="M4.93 19.07l1.56-1.56"></path>
+              <path d="M17.51 6.49l1.56-1.56"></path>
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.2 15.1A8.7 8.7 0 1 1 8.9 3.8a7 7 0 0 0 11.3 11.3z"></path>
+            </svg>
+          </button>
         </div>
       </div>
-    </div>
+    </header>
 
-    <canvas id="disp-canvas"></canvas>
+    <section class="section" id="about">
+      <div class="hero">
+        <div class="card hero-main">
+          <div class="hero-photo">
+            <img src="mustafa-pic.jpeg" alt="Mustafa AlShaqaq" />
+          </div>
+          <div class="hero-content">
+            <span class="eyebrow">Smart structures · metamaterials · vibrations</span>
+            <h2>Mustafa AlShaqaq</h2>
+            <p class="hero-meta">
+              Assistant Professor, Mechanical Engineering Department<br>
+              King Fahd University of Petroleum & Minerals (KFUPM)<br>
+              Affiliated with the Interdisciplinary Research Center of Intelligent Manufacturing and Robotics (IRC-Manufacturing)
+            </p>
+            <p class="hero-bio">
+              I lead a research group working at the intersection of smart structures, piezoelectricity, structural dynamics, metamaterials, energy harvesting, and wave manipulation. Our work combines analytical modeling, finite-element simulation, experiments, and programmable synthetic-impedance circuits to study tunable and multifunctional piezoelectric metastructures.
+            </p>
+            <div class="button-row">
+              <a class="btn primary" href="mailto:malshaqaq@kfupm.edu.sa">malshaqaq@kfupm.edu.sa</a>
+              <a class="btn" href="https://scholar.google.com/citations?hl=en&user=j0fzfS4AAAAJ" target="_blank" rel="noreferrer">Google Scholar</a>
+              <a class="btn" href="https://pure.kfupm.edu.sa/en/persons/mustafa-alshaqaq/" target="_blank" rel="noreferrer">KFUPM Profile</a>
+              <a class="btn" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+          </div>
+        </div>
 
-  </div>
-</section>
+        <div class="hero-side">
+          <div class="card panel-pad">
+            <div class="stats-grid">
+              <div class="stat"><strong>5</strong><span>Group Members</span></div>
+              <div class="stat"><strong>1</strong><span>Active Grant</span></div>
+              <div class="stat"><strong>5</strong><span>Journal Papers</span></div>
+              <div class="stat"><strong>2023</strong><span>Joined KFUPM</span></div>
+            </div>
+          </div>
+          <div class="card panel-pad">
+            <div class="section-heading" style="margin-bottom: 0;">
+              <div class="mini">Openings</div>
+              <h3 style="font-size: 1.35rem;">Ph.D. and M.S. opportunities</h3>
+              <p>Open to highly motivated Ph.D. and M.S. students interested in metamaterials, vibrations, piezoelectric systems, wave control, and intelligent structural systems. Students with strong backgrounds in mechanics, FEM, controls, programming, and experiments are especially encouraged to get in touch.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<!-- PUBLICATIONS PREVIEW -->
-<section class="section section-white" id="publications">
-  <div class="reveal">
-    <div class="section-label">Publications</div>
-    <h2 class="section-title">Selected papers</h2>
-  </div>
-  <div class="pub-preview">
-    <div class="pub-item">
-      <div class="pub-year">2023</div>
+      <div class="three-col" style="margin-top: 22px;">
+        <div class="card panel-pad">
+          <div class="section-heading">
+            <div class="mini">About</div>
+            <h3>Education</h3>
+          </div>
+          <div class="stack">
+            <div class="info-item">
+              <h4>Ph.D. in Mechanical Engineering</h4>
+              <div class="sub">Georgia Institute of Technology</div>
+              <div class="smallcaps" style="margin-top: 8px;">2020–2023</div>
+              <p class="muted">Focus: acoustics and vibrations; minor in applied mathematics. Dissertation: Programmable Piezoelectric Metamaterials Leveraging Synthetic Impedance Circuits.</p>
+            </div>
+            <div class="info-item">
+              <h4>M.Sc. in Mechanical Engineering</h4>
+              <div class="sub">Georgia Institute of Technology</div>
+              <div class="smallcaps" style="margin-top: 8px;">2020–2023</div>
+            </div>
+            <div class="info-item">
+              <h4>M.Sc. in Mechanical Engineering</h4>
+              <div class="sub">King Fahd University of Petroleum & Minerals</div>
+              <div class="smallcaps" style="margin-top: 8px;">2016–2018</div>
+              <p class="muted">Thesis: Vibration of Axially Moving Small-Size Beams under Variable Electrostatic Force.</p>
+            </div>
+            <div class="info-item">
+              <h4>B.Sc. in Mechanical Engineering</h4>
+              <div class="sub">King Fahd University of Petroleum & Minerals</div>
+              <div class="smallcaps" style="margin-top: 8px;">2010–2015</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card panel-pad">
+          <div class="section-heading">
+            <div class="mini">About</div>
+            <h3>Selected publications</h3>
+          </div>
+          <div class="stack">
+            <div class="info-item">
+              <div class="smallcaps">2023 · Journal</div>
+              <h4>Digital Programming of Reciprocity Breaking in Resonant Piezoelectric Metamaterials</h4>
+              <div class="muted">M. Alshaqaq, C. Sugino, and A. Erturk</div>
+              <div class="muted"><em>Physical Review Research 5, 043003</em></div>
+            </div>
+            <div class="info-item">
+              <div class="smallcaps">2022 · Journal</div>
+              <h4>Programmable Rainbow Trapping and Band-Gap Enhancement via Spatial Group-Velocity Tailoring in Elastic Metamaterials</h4>
+              <div class="muted">M. Alshaqaq, C. Sugino, and A. Erturk</div>
+              <div class="muted"><em>Physical Review Applied 17, L021003</em></div>
+            </div>
+            <div class="info-item">
+              <div class="smallcaps">2022 · Journal</div>
+              <h4>Spatially Programmable Wave Compression and Signal Enhancement in a Piezoelectric Metamaterial Waveguide</h4>
+              <div class="muted">C. Sugino, M. Alshaqaq, and A. Erturk</div>
+              <div class="muted"><em>Physical Review B 106, 174304</em></div>
+            </div>
+            <div class="info-item">
+              <div class="smallcaps">2021 · Journal</div>
+              <h4>Graded Multifunctional Piezoelectric Metastructures for Wideband Vibration Attenuation and Energy Harvesting</h4>
+              <div class="muted">M. Alshaqaq and A. Erturk</div>
+              <div class="muted"><em>Smart Materials and Structures 30, 015029</em></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card panel-pad">
+          <div class="section-heading">
+            <div class="mini">About</div>
+            <h3>Recent research and project</h3>
+          </div>
+          <div class="stack">
+            <div class="info-item">Graded piezoelectric metastructures for wideband vibration attenuation and energy harvesting.</div>
+            <div class="info-item">Programmable rainbow trapping and group-velocity tailoring in elastic metamaterials.</div>
+            <div class="info-item">Wave compression and acoustic-black-hole-inspired piezoelectric waveguides.</div>
+            <div class="info-item">Spatiotemporal modulation and reciprocity breaking in resonant piezoelectric metamaterials.</div>
+            <div class="info-item">Current funded project: Vibration Characteristics of Nonlocally Resonant Piezoelectric Metamaterials.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="section-heading">
+        <div class="mini">News</div>
+        <h3>Group updates</h3>
+        <p>Student joins, conference presentations, and project milestones.</p>
+      </div>
+      <div class="news-grid">
+        <div class="card timeline-card">
+          <div class="smallcaps">2025</div>
+          <h4>Hesham Abdu joined the group as a Ph.D. student</h4>
+          <div class="muted">Research direction: auxetic metamaterials (topic under refinement).</div>
+        </div>
+        <div class="card timeline-card">
+          <div class="smallcaps">2025</div>
+          <h4>Abdullah Alharthi joined the group as an M.S. student</h4>
+          <div class="muted">Planned research area: damage detection in vibrating structures using machine learning.</div>
+        </div>
+        <div class="card timeline-card">
+          <div class="smallcaps">2025</div>
+          <h4>Presented work on roton-like dispersion in piezoelectric metamaterials</h4>
+          <div class="muted">ASME SMASIS 2025 presentation on nonlocally resonant piezoelectric metamaterials.</div>
+        </div>
+        <div class="card timeline-card">
+          <div class="smallcaps">2024</div>
+          <h4>Ali Abdulai joined the group as an M.S. student</h4>
+          <div class="muted">Working on vibration attenuation enhancement in locally resonant acoustic metamaterials via Bayesian optimization.</div>
+        </div>
+        <div class="card timeline-card">
+          <div class="smallcaps">2024</div>
+          <h4>Presented energy harvesting work combining rainbow trapping and acoustic black hole concepts</h4>
+          <div class="muted">ASME SMASIS 2024 presentation based on metamaterial energy harvesting research.</div>
+        </div>
+        <div class="card timeline-card">
+          <div class="smallcaps">2025–2026</div>
+          <h4>Early Career Research Grant project underway at KFUPM</h4>
+          <div class="muted">Project: Vibration Characteristics of Nonlocally Resonant Piezoelectric Metamaterials.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <div class="search-wrap">
+        <div class="section-heading" style="margin-bottom: 0;">
+          <div class="mini">Publications</div>
+          <h3>Chronological list</h3>
+          <p>Search across journal papers and conference presentations.</p>
+        </div>
+        <div class="search-box">
+          <input type="text" id="pubSearch" placeholder="Search title, venue, year, or author">
+        </div>
+      </div>
+
+      <div class="pub-list" id="pubList">
+        <div class="card pub-item pub-record" data-search="2025 conference roton-like dispersion in nonlocally resonant piezoelectric metamaterials mustafa alshaqaq asme smasis">
+          <div class="smallcaps">2025 · Conference</div>
+          <h4>Roton-like Dispersion in Nonlocally Resonant Piezoelectric Metamaterials</h4>
+          <div class="muted">M. Alshaqaq</div>
+          <div class="muted"><em>ASME 2025 Smart Materials, Adaptive Structures and Intelligent Systems</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2024 conference leveraging rainbow and acoustic black hole concepts in piezoelectric energy harvesting from metamaterials mustafa alshaqaq a erturk asme smasis">
+          <div class="smallcaps">2024 · Conference</div>
+          <h4>Leveraging Rainbow and Acoustic Black Hole Concepts in Piezoelectric Energy Harvesting from Metamaterials</h4>
+          <div class="muted">M. Alshaqaq and A. Erturk</div>
+          <div class="muted"><em>ASME 2024 Smart Materials, Adaptive Structures and Intelligent Systems</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2023 journal digital programming of reciprocity breaking in resonant piezoelectric metamaterials mustafa alshaqaq c sugino a erturk physical review research">
+          <div class="smallcaps">2023 · Journal</div>
+          <h4>Digital Programming of Reciprocity Breaking in Resonant Piezoelectric Metamaterials</h4>
+          <div class="muted">M. Alshaqaq, C. Sugino, and A. Erturk</div>
+          <div class="muted"><em>Physical Review Research 5, 043003</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2023 conference digitally programmable piezoelectric metamaterials and nonlinear electromechanical structures with synthetic impedance circuits mustafa alshaqaq o alfahmi a erturk nodycon">
+          <div class="smallcaps">2023 · Conference</div>
+          <h4>Digitally Programmable Piezoelectric Metamaterials and Nonlinear Electromechanical Structures with Synthetic Impedance Circuits</h4>
+          <div class="muted">M. Alshaqaq, O. Alfahmi, and A. Erturk</div>
+          <div class="muted"><em>NODYCON 2023</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2022 journal programmable rainbow trapping and band-gap enhancement via spatial group-velocity tailoring in elastic metamaterials mustafa alshaqaq c sugino a erturk physical review applied">
+          <div class="smallcaps">2022 · Journal</div>
+          <h4>Programmable Rainbow Trapping and Band-Gap Enhancement via Spatial Group-Velocity Tailoring in Elastic Metamaterials</h4>
+          <div class="muted">M. Alshaqaq, C. Sugino, and A. Erturk</div>
+          <div class="muted"><em>Physical Review Applied 17, L021003</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2022 journal spatially programmable wave compression and signal enhancement in a piezoelectric metamaterial waveguide c sugino m alshaqaq a erturk physical review b">
+          <div class="smallcaps">2022 · Journal</div>
+          <h4>Spatially Programmable Wave Compression and Signal Enhancement in a Piezoelectric Metamaterial Waveguide</h4>
+          <div class="muted">C. Sugino, M. Alshaqaq, and A. Erturk</div>
+          <div class="muted"><em>Physical Review B 106, 174304</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2022 conference digitally tunable non-reciprocal wave propagation using piezoelectric metamaterials with synthetic impedance circuits mustafa alshaqaq c sugino a erturk acoustical society of america">
+          <div class="smallcaps">2022 · Conference</div>
+          <h4>Digitally Tunable Non-Reciprocal Wave Propagation Using Piezoelectric Metamaterials with Synthetic Impedance Circuits</h4>
+          <div class="muted">M. Alshaqaq, C. Sugino, and A. Erturk</div>
+          <div class="muted"><em>183rd Meeting of the Acoustical Society of America</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2022 conference programmable spatial and spatiotemporal modulation of piezoelectric metamaterials with synthetic impedance circuits mustafa alshaqaq c sugino a erturk spie smart structures nde">
+          <div class="smallcaps">2022 · Conference</div>
+          <h4>Programmable Spatial and Spatiotemporal Modulation of Piezoelectric Metamaterials with Synthetic Impedance Circuits</h4>
+          <div class="muted">M. Alshaqaq, C. Sugino, and A. Erturk</div>
+          <div class="muted"><em>SPIE Smart Structures and NDE</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2022 conference programmable group velocity profile tailoring in a piezoelectric rainbow metamaterial mustafa alshaqaq c sugino a erturk us national congress theoretical applied mechanics">
+          <div class="smallcaps">2022 · Conference</div>
+          <h4>Programmable Group Velocity Profile Tailoring in a Piezoelectric Rainbow Metamaterial</h4>
+          <div class="muted">M. Alshaqaq, C. Sugino, and A. Erturk</div>
+          <div class="muted"><em>19th U.S. National Congress on Theoretical and Applied Mechanics</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2021 conference rainbow trapping of elastic waves in a programmable metamaterial beam mustafa alshaqaq c sugino a erturk spie smart structures nde">
+          <div class="smallcaps">2021 · Conference</div>
+          <h4>Rainbow Trapping of Elastic Waves in a Programmable Metamaterial Beam</h4>
+          <div class="muted">M. Alshaqaq, C. Sugino, and A. Erturk</div>
+          <div class="muted"><em>SPIE Smart Structures and NDE</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2021 conference programmable piezoelectric acoustic black hole for wavelength control and enhanced sensing c sugino m alshaqaq a erturk spie smart structures nde">
+          <div class="smallcaps">2021 · Conference</div>
+          <h4>Programmable Piezoelectric Acoustic Black Hole for Wavelength Control and Enhanced Sensing</h4>
+          <div class="muted">C. Sugino, M. Alshaqaq, and A. Erturk</div>
+          <div class="muted"><em>SPIE Smart Structures and NDE</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2021 journal graded multifunctional piezoelectric metastructures for wideband vibration attenuation and energy harvesting mustafa alshaqaq a erturk smart materials and structures">
+          <div class="smallcaps">2021 · Journal</div>
+          <h4>Graded Multifunctional Piezoelectric Metastructures for Wideband Vibration Attenuation and Energy Harvesting</h4>
+          <div class="muted">M. Alshaqaq and A. Erturk</div>
+          <div class="muted"><em>Smart Materials and Structures 30, 015029</em></div>
+        </div>
+        <div class="card pub-item pub-record" data-search="2020 journal nonlinear behavior of a vibrating axially moving small-size beam under an electrostatic force mustafa alshaqaq m a hawwa zamm">
+          <div class="smallcaps">2020 · Journal</div>
+          <h4>Nonlinear Behavior of a Vibrating Axially Moving Small-Size Beam Under an Electrostatic Force</h4>
+          <div class="muted">M. Alshaqaq and M. A. Hawwa</div>
+          <div class="muted"><em>ZAMM 100, e201900104</em></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-heading">
+        <div class="mini">Projects</div>
+        <h3>Funded research</h3>
+        <p>Current grant-supported work in nonlocally resonant piezoelectric metamaterials.</p>
+      </div>
+      <div class="project-layout">
+        <div class="card panel-pad">
+          <div class="smallcaps">May 2025 – May 2026</div>
+          <h3 style="margin: 10px 0 8px; font-size: 2rem; letter-spacing: -0.03em;">Early Career Research Grant — Vibration Characteristics of Nonlocally Resonant Piezoelectric Metamaterials</h3>
+          <div class="muted">Budget: SAR 71,800</div>
+          <p class="muted" style="margin-top: 18px; line-height: 1.9;">
+            This project develops analytical and finite-element models for nonlocally resonant electromechanical metamaterial beams, where unit cells interact beyond nearest neighbors through electrical coupling. The work studies roton-like dispersion, wave propagation, boundary-condition effects, and design guidelines for future fabrication and experiments.
+          </p>
+          <div class="bullet-list">
+            <div>Unit-cell analytical modeling using the plane wave expansion method (PWEM).</div>
+            <div>Finite-element simulations in COMSOL for full-structure validation.</div>
+            <div>Investigation of local and nonlocal resonant frequencies and interaction order.</div>
+            <div>Target outcome: journal publication and a validated computational framework.</div>
+          </div>
+        </div>
+        <div class="card panel-pad">
+          <h4 style="margin: 0 0 10px; font-size: 1.1rem;">Project focus</h4>
+          <p class="muted" style="line-height: 1.9;">The project examines how long-range electrical coupling in piezoelectric metamaterials reshapes dispersion and vibration response in both infinite and finite structures.</p>
+          <p class="muted" style="line-height: 1.9;">Core themes include PWEM-based dispersion analysis, COMSOL validation, local and nonlocal resonances, roton-like behavior, and future experimental realization.</p>
+          <p class="muted" style="line-height: 1.9;">This section can later be expanded with figures, milestones, grant outputs, and student contributions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="teaching">
+      <div class="section-heading">
+        <div class="mini">Teaching</div>
+        <h3>Courses at KFUPM</h3>
+        <p>Courses taught from Fall 2023 through Spring 2026.</p>
+      </div>
+      <div class="card table-card">
+        <div class="table-head">
+          <div>Semester</div>
+          <div>Course</div>
+          <div>Role</div>
+        </div>
+        <div class="table-row"><div><strong>Spring 2026</strong></div><div>ME 401 — System Dynamics and Control</div><div class="muted">Course Instructor</div></div>
+        <div class="table-row"><div><strong>Spring 2026</strong></div><div>ME 201 — Dynamics</div><div class="muted">Course Instructor</div></div>
+        <div class="table-row"><div><strong>Fall 2025</strong></div><div>ME 553 — Advanced Vibrations</div><div class="muted">Course Instructor</div></div>
+        <div class="table-row"><div><strong>Fall 2025</strong></div><div>ME 401 — System Dynamics and Control</div><div class="muted">Course Instructor</div></div>
+        <div class="table-row"><div><strong>Summer 2025</strong></div><div>ME 401 — System Dynamics and Control</div><div class="muted">Course Instructor</div></div>
+        <div class="table-row"><div><strong>Summer 2025</strong></div><div>ME 402 — Measurements and Control Laboratory</div><div class="muted">Lab Instructor</div></div>
+        <div class="table-row"><div><strong>Fall 2024</strong></div><div>ME 482 — Mechanical Vibrations</div><div class="muted">Course Instructor</div></div>
+        <div class="table-row"><div><strong>Fall 2024</strong></div><div>ME 201 — Dynamics</div><div class="muted">Course Instructor</div></div>
+        <div class="table-row"><div><strong>Summer 2024</strong></div><div>ME 201 — Dynamics</div><div class="muted">Course Instructor</div></div>
+        <div class="table-row"><div><strong>Spring 2024</strong></div><div>ME 201 — Dynamics</div><div class="muted">Course Instructor</div></div>
+        <div class="table-row"><div><strong>Fall 2023</strong></div><div>ME 201 — Dynamics</div><div class="muted">Course Instructor</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="interactive">
+      <div class="section-heading">
+        <div class="mini">Interactive</div>
+        <h3>Research-inspired visualizations</h3>
+        <p>These browser-based plots are styled to match the site and are inspired by the uploaded JavaScript concepts for dispersion and transmissibility.</p>
+      </div>
+
+      <div class="card plot-card" style="margin-bottom: 20px;">
+        <h4>Dispersion relation of a piezoelectric metamaterial</h4>
+        <p>A lightweight interactive plot with controls for resonance frequency, coupling strength, and damping.</p>
+        <canvas id="dispersionCanvas" height="420"></canvas>
+        <div class="controls">
+          <div class="control">
+            <label><span>Shunt frequency $\omega_t / \omega_0$</span><strong id="dispWtVal">1.00</strong></label>
+            <input id="dispWt" type="range" min="0.60" max="1.60" step="0.01" value="1.00">
+          </div>
+          <div class="control">
+            <label><span>Coupling coefficient ($\alpha$)</span><strong id="dispAlphaVal">0.15</strong></label>
+            <input id="dispAlpha" type="range" min="0.00" max="0.60" step="0.01" value="0.15">
+          </div>
+          <div class="control">
+            <label><span>Damping ratio ($\zeta$)</span><strong id="dispZetaVal">0.000</strong></label>
+            <input id="dispZeta" type="range" min="0.000" max="0.060" step="0.001" value="0.000">
+          </div>
+        </div>
+      </div>
+
+      <div class="card plot-card">
+        <h4>Tip transmissibility of a graded piezoelectric metastructure</h4>
+        <p>A two-panel visualization for the grading profile and its transmissibility response.</p>
+        <canvas id="transCanvas" height="520"></canvas>
+        <div class="controls">
+            <div class="control">
+              <label><span>Damping ratio $\zeta$</span><strong id="transZetaVal">0.0010</strong></label>
+              <input id="transZeta" type="range" min="0.0001" max="0.02" step="0.0001" value="0.0010">
+            </div>
+          <div class="control">
+            <label><span>Grading width ($\delta$)</span><strong id="transDeltaVal">1.0</strong></label>
+            <input id="transDelta" type="range" min="0.0" max="3.0" step="0.1" value="1.0">
+          </div>
+          <div class="control">
+            <label><span>Grading power $p$</span><strong id="transPowerVal">1.00</strong></label>
+            <input id="transPower" type="range" min="0.0" max="3.0" step="0.05" value="1.00">
+          </div>
+                  <div class="control">
+            <label><span>Shunt time constant ($\tau$)</span><strong id="transTauVal">500</strong></label>
+            <input id="transTau" type="range" min="50" max="2000" step="10" value="500">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="people">
+      <div class="section-heading">
+        <div class="mini">People</div>
+        <h3>Research group</h3>
+        <p>Principal investigator, postdoctoral researcher, and graduate students.</p>
+      </div>
+      <div class="people-grid">
+        <div class="card person-card">
+          <div class="person-top">
+            <img class="avatar" src="mustafa-pic.jpeg" alt="Mustafa AlShaqaq">
+            <div>
+              <h4>Mustafa AlShaqaq</h4>
+              <div class="muted">Principal Investigator</div>
+            </div>
+          </div>
+          <p class="muted" style="line-height: 1.9;">Piezoelectric metamaterials, structural dynamics, wave propagation, and energy harvesting.</p>
+        </div>
+        <div class="card person-card">
+          <div class="person-top">
+            <img class="avatar" src="sallam-pic.jpeg" alt="Sallam Ahmed Nagy Kouritem">
+            <div>
+              <h4>Sallam Ahmed Nagy Kouritem</h4>
+              <div class="muted">Postdoctoral Researcher</div>
+            </div>
+          </div>
+          <p class="muted" style="line-height: 1.9;">Postdoctoral researcher in the group.</p>
+        </div>
+        <div class="card person-card">
+          <div class="person-top">
+            <img class="avatar" src="hesham-pic.jpeg" alt="Hesham Abdu">
+            <div>
+              <h4>Hesham Abdu</h4>
+              <div class="muted">Ph.D. Student · Joined 2025</div>
+            </div>
+          </div>
+          <p class="muted" style="line-height: 1.9;">Auxetic metamaterials (topic under refinement).</p>
+        </div>
+        <div class="card person-card">
+          <div class="person-top">
+            <div class="avatar-fallback">AA</div>
+            <div>
+              <h4>Ali Abdulai</h4>
+              <div class="muted">M.S. Student · Joined 2024</div>
+            </div>
+          </div>
+          <p class="muted" style="line-height: 1.9;">Vibration attenuation enhancement in locally resonant acoustic metamaterials via Bayesian optimization.</p>
+        </div>
+        <div class="card person-card">
+          <div class="person-top">
+            <div class="avatar-fallback">AH</div>
+            <div>
+              <h4>Abdullah Alharthi</h4>
+              <div class="muted">M.S. Student · Joined 2025</div>
+            </div>
+          </div>
+          <p class="muted" style="line-height: 1.9;">Damage detection in vibrating structures using machine learning (topic under refinement).</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="card">
       <div>
-        <div class="pub-title">Digital programming of reciprocity breaking in resonant piezoelectric metamaterials</div>
-        <div class="pub-meta">M. AlShaqaq, C. Sugino, A. Erturk · <em>Physical Review Research</em>, 5, 043003</div>
-        <span class="pub-award">ASME Adaptive Structures Best Paper Award 2024</span>
+        <strong>Mustafa AlShaqaq Research Group</strong>
+        <p>Mechanical Engineering Department · KFUPM · Dhahran, Saudi Arabia</p>
       </div>
-    </div>
-    <div class="pub-item">
-      <div class="pub-year">2022</div>
-      <div>
-        <div class="pub-title">Spatially programmable wave compression and signal enhancement in a piezoelectric metamaterial waveguide</div>
-        <div class="pub-meta">C. Sugino, M. AlShaqaq, A. Erturk · <em>Physical Review B</em>, 106, 174304</div>
+      <div class="footer-links">
+        <a href="https://scholar.google.com/citations?hl=en&user=j0fzfS4AAAAJ" target="_blank" rel="noreferrer">Google Scholar</a>
+        <a href="https://pure.kfupm.edu.sa/en/persons/mustafa-alshaqaq/" target="_blank" rel="noreferrer">KFUPM Pure Profile</a>
+        <a href="mailto:malshaqaq@kfupm.edu.sa">Contact</a>
       </div>
-    </div>
-    <div class="pub-item">
-      <div class="pub-year">2022</div>
-      <div>
-        <div class="pub-title">Programmable rainbow trapping and band-gap enhancement via spatial group-velocity tailoring in elastic metamaterials</div>
-        <div class="pub-meta">M. AlShaqaq, C. Sugino, A. Erturk · <em>Physical Review Applied</em>, 17, L021003</div>
-      </div>
-    </div>
-    <div class="pub-item">
-      <div class="pub-year">2021</div>
-      <div>
-        <div class="pub-title">Graded multifunctional piezoelectric metastructures for wideband vibration attenuation and energy harvesting</div>
-        <div class="pub-meta">M. AlShaqaq, A. Erturk · <em>Smart Materials and Structures</em>, 30, 015029</div>
-      </div>
-    </div>
+    </footer>
   </div>
-  <div style="margin-top:2rem">
-    <a href="publications.html" class="btn btn-outline-dark">View all publications</a>
-  </div>
-</section>
 
-<!-- JOIN -->
-<section class="section section-navy">
-  <div class="join-inner">
-    <div class="section-label">Openings</div>
-    <h2 class="section-title">Interested in joining?</h2>
-    <p>
-      The group is in its early stages and we are looking for motivated students
-      who want to work on interesting problems at the intersection of mechanics,
-      materials, and wave physics. If that sounds like you, reach out.
-    </p>
-    <div class="join-slots">
-      <div class="slot">
-        <div class="slot-title">PhD</div>
-        <p>Funded positions available. Background in mechanics, physics, or engineering preferred.</p>
-      </div>
-      <div class="slot">
-        <div class="slot-title">MS</div>
-        <p>Research-track MS projects in smart structures and metamaterials.</p>
-      </div>
-      <div class="slot">
-        <div class="slot-title">Undergrad</div>
-        <p>Senior project opportunities for motivated KFUPM students.</p>
-      </div>
-    </div>
-    <a href="mailto:malshaqaq@kfupm.edu.sa" class="btn btn-gold">malshaqaq@kfupm.edu.sa</a>
-  </div>
-</section>
-
-<footer></footer>
-
-<script src="/components.js"></script>
-
-<!-- Wave background -->
-<script>
-(function(){
-  const wC = document.getElementById('wave-canvas');
-  const wX = wC.getContext('2d');
-  let wW, wH, t = 0;
-  const waves = [
-    {a:40,f:0.008,s:0.018,p:0,  c:'rgba(201,168,76,0.15)', y:0.45},
-    {a:28,f:0.012,s:0.025,p:2.1,c:'rgba(29,158,117,0.10)', y:0.55},
-    {a:20,f:0.006,s:0.012,p:4.2,c:'rgba(255,255,255,0.05)',y:0.50},
-    {a:48,f:0.005,s:0.009,p:1.0,c:'rgba(201,168,76,0.06)', y:0.62},
-    {a:16,f:0.018,s:0.032,p:3.5,c:'rgba(29,158,117,0.07)', y:0.38},
-  ];
-  function resize(){ wW=wC.width=wC.offsetWidth; wH=wC.height=wC.offsetHeight; }
-  resize(); window.addEventListener('resize', resize);
-  (function loop(){
-    wX.clearRect(0,0,wW,wH); t+=0.016;
-    waves.forEach(w=>{
-      wX.beginPath();
-      for(let x=0;x<=wW;x+=2){
-        const y=wH*w.y+Math.sin(x*w.f+t*w.s*60+w.p)*w.a;
-        x===0?wX.moveTo(x,y):wX.lineTo(x,y);
-      }
-      wX.strokeStyle=w.c; wX.lineWidth=1.5; wX.stroke();
-    });
-    requestAnimationFrame(loop);
-  })();
-})();
-</script>
-
-<!-- Scroll reveal -->
-<script>
-(function(){
-  const obs = new IntersectionObserver(
-    es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }),
-    {threshold:0.1}
-  );
-  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-  const pObs = new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){
-      const i=[...document.querySelectorAll('.pub-item')].indexOf(e.target);
-      setTimeout(()=>e.target.classList.add('visible'),i*100);
-    }
-  }),{threshold:0.1});
-  document.querySelectorAll('.pub-item').forEach(el=>pObs.observe(el));
-})();
-</script>
-
-<!-- KaTeX auto-render -->
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  renderMathInElement(document.body, {
-    delimiters: [
-      {left: '\\(', right: '\\)', display: false},
-      {left: '\\[', right: '\\]', display: true}
-    ],
-    throwOnError: false
-  });
-});
-</script>
-
-<!-- Dispersion plot (separate file) -->
-<script src="dispersion.js"></script>
-
+  <script src="dispersion.js"></script>
+  <script src="transmissibility.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
