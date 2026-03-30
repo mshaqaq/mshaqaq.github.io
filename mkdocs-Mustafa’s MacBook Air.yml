@@ -1,0 +1,82 @@
+site_name: Mustafa AlShaqaq
+site_url: http://mywebsite.example
+markdown_extensions:
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - admonition
+  - pymdownx.details
+  - pymdownx.blocks.caption
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - md_in_html
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      # line_spans: : _span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  
+    extra:
+      social:
+        - icon: simple/linkedin
+          link: https://www.linkedin.com/in/malshaqaq/
+
+theme:
+  features:
+    - navigation.footer
+    - navigation.tabs
+    - navigation.tabs.sticky
+  name: material
+  font:
+    text: Poppins
+    code: Roboto Mono
+    # icon:
+  icon:
+    admonition:
+      note: fontawesome/solid/note-sticky
+      abstract: fontawesome/solid/book
+      info: fontawesome/solid/circle-info
+      tip: fontawesome/solid/bullhorn
+      success: material/school
+      question: fontawesome/solid/circle-question
+      warning: fontawesome/solid/triangle-exclamation
+      failure: fontawesome/solid/bomb
+      danger: fontawesome/solid/skull
+      bug: fontawesome/solid/robot
+      example: fontawesome/solid/flask
+      quote: fontawesome/solid/quote-left
+      # education: fontawesome/solid/quote-left
+  # logo: fontawesome/solid/m
+  logo: assets/kfupm-logo.png
+  favicon: fontawesome/solid/m.png
+  palette:
+    # Dark Mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Dark mode
+      primary: white
+      accent: teal
+
+      # Light Mode
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Light mode
+      primary: white
+      accent: teal
+extra_css:
+  - stylesheets/extra.css
+
+      link: https://www.linkedin.com/in/malshaqaq/
