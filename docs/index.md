@@ -4,7 +4,9 @@ hide:
 ---
 
 ## About me
+
 ![Mustafa AlShaqaq](assets/mustafa-pic.jpeg){ .profile-pic }
+
 Assistant Professor, Mechanical Engineering Department
 King Fahd University of Petroleum & Minerals (KFUPM)
 Affiliated with the Interdisciplinary Research Center of Intelligent Manufacturing and Robotics (IRC-Manufacturing)
