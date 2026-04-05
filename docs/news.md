@@ -5,6 +5,10 @@ hide:
 
 ## 2026
 
+**31-March-2026**{.news-tag}
+
+:   Our paper "Roton-like dispersion and voltage enhancement in nonlocally resonant piezoelectric metamaterial beams" is now published.
+
 **10-January-2026**{.news-tag}
 :   Abdullau Alharthi joins the group as a M.Sc. student. Welcome!.
 

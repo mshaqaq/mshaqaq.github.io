@@ -16,6 +16,8 @@ hide:
 
 5.  **Alshaqaq, M.**, Sugino, C., and Erturk, A., 2023, “[Digital Programming of Reciprocity Breaking in Resonant Piezoelectric Metamaterials](https://journals.aps.org/prresearch/pdf/10.1103/PhysRevResearch.5.043003),” Physical Review Research, 5, 043003.
 
+6.  **Alshaqaq, M.**, 2026, "[Roton-like dispersion and voltage enhancement in nonlocally resonant piezoelectric metamaterial beams.](https://iopscience.iop.org/article/10.1088/1361-665X/ae59d6/meta)," Smart Materials and Structures.
+
 
 
 
