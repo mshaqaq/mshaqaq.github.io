@@ -4,7 +4,9 @@ hide:
 ---
 
 ## 2026
+**29-April-2026**{.news-tag}
 
+: Congratulations to **Abdulai** on successfully passing his thesis defense! We are proud of his achievement and look forward to his continued success in the next stage of his academic and professional journey. 
 **31-March-2026**{.news-tag}
 
 :   Our paper "Roton-like dispersion and voltage enhancement in nonlocally resonant piezoelectric metamaterial beams" is now published.
