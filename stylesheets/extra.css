@@ -1,0 +1,81 @@
+
+
+.profile-pic {
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin: 1.5rem auto;
+  display: block;
+  border: 3px solid;
+  float: inline-start;
+  object-fit: cover;
+  margin-right: 2rem;
+}
+
+.paper-figure {
+  width: 760px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+  margin: 1.5rem auto;
+}
+
+.inline-icon {
+  width: 1.5rem;
+  height: auto;
+  vertical-align: middle;
+}
+
+.social-icon {
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+
+.news-tag {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+
+body {
+  text-align: justify;
+}
+
+.md-typeset h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  /* color:darkgray; */
+  margin-top: 3rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+  text-decoration-line: underline;
+}
+
+:root {
+  --link-light: darkgoldenrod;
+  --link-light-hover: gray;
+  --link-dark: #DAC961;
+  --link-dark-hover: gray;
+}
+
+/* light scheme */
+[data-md-color-scheme="default"] .md-typeset a {
+  color: var(--link-light);
+  /* font-weight: 600; */
+}
+
+[data-md-color-scheme="default"] .md-typeset a:hover {
+  color: var(--link-light-hover);
+}
+
+/* dark scheme */
+[data-md-color-scheme="slate"] .md-typeset a {
+  color: var(--link-dark);
+}
+
+[data-md-color-scheme="slate"] .md-typeset a:hover {
+  color: var(--link-dark-hover);
+}
