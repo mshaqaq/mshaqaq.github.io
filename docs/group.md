@@ -24,6 +24,6 @@ hide:
 
 ## M.S. Students
 
-1.  Ali Abdulai (09/2024 - present)
+1.  Ali Abdulai (09/2024 - 05/2026)
 
 2.  Abdullah Alharthi (09/2025 - present)

@@ -18,6 +18,8 @@ hide:
 
 6.  **Alshaqaq, M.**, 2026, "[Roton-like dispersion and voltage enhancement in nonlocally resonant piezoelectric metamaterial beams.](https://iopscience.iop.org/article/10.1088/1361-665X/ae59d6/meta)," Smart Materials and Structures.
 
+7.  Abdulai, A., and **Alshaqaq, M.**, 2026, "[Bayesian Optimization of Resonator Grading for Bandgap Widening in Finite Locally Resonant Acoustic Metamaterials](https://link.springer.com/epdf/10.1007/s42417-026-02625-2?sharing_token=bJksVWvOPcYJ1aOThI0Zrve4RwlQNchNByi7wbcMAY6o6W5ZBwDfoKiKPoJU2Z4STJBndBTaxzx_vypXuqJpC9KoZ8vbeFhQ2-iQPFMZLzpNoEuffrlt_FLOUdLV8SqGmxCLoraKfYbId7OubBkFcBKO9gO68y8lFpoK7fvRyPU%3D),\" Journal of Vibration Engineering & Technologies.
+
 
 
 
