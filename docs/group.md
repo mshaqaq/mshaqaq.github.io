@@ -15,6 +15,8 @@ hide:
 
 -   Sallam Ahmed Nagy Kouritem (09/2025 - present)
 
+-   Sunny Kumar (04/2026 - present)
+
 ## Ph.D. Students
 
 1.   Hesham Abduo (09/2025 - present)
