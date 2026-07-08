@@ -4,6 +4,10 @@ hide:
 ---
 
 ## 2026
+**08-July-2026**{.news-tag}
+
+:   Our paper "Bayesian Optimization of Resonator Grading for Bandgap Widening in Finite Locally Resonant Acoustic Metamaterials" is now published.
+
 **29-April-2026**{.news-tag}
 
 : Congratulations to **Abdulai** on successfully passing his thesis defense! We are proud of his achievement and look forward to his continued success in the next stage of his academic and professional journey. 
