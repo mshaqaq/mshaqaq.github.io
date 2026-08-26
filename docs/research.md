@@ -20,6 +20,8 @@ hide:
 
 7.  Abdulai, A., and **Alshaqaq, M.**, 2026, "[Bayesian Optimization of Resonator Grading for Bandgap Widening in Finite Locally Resonant Acoustic Metamaterials](https://trebuchet.public.springernature.app/get_content/f22613ac-ef1a-4266-b324-f861eb90e36c?utm_source=rct_congratemailt&utm_medium=email&utm_campaign=nonoa_20260708&utm_content=10.1007/s42417-026-02625-2)," Journal of Vibration Engineering & Technologies.
 
+8.  **Alshaqaq, M.**, 2026, "[Bandgap Formation and Dual Rainbow Trapping in Graded Ladder-Shunted Piezoelectric Metamaterial Beams](https://doi.org/10.1016/j.rineng.2026.112556)," Results in Engineering, 32, 112556.
+
 
 
 

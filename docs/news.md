@@ -4,6 +4,10 @@ hide:
 ---
 
 ## 2026
+**26-August-2026**{.news-tag}
+
+:   Our paper "Bandgap formation and dual rainbow trapping in graded ladder-shunted piezoelectric metamaterial beams" is now published.
+
 **08-July-2026**{.news-tag}
 
 :   Our paper "Bayesian Optimization of Resonator Grading for Bandgap Widening in Finite Locally Resonant Acoustic Metamaterials" is now published.
