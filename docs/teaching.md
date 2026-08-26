@@ -15,3 +15,5 @@ hide:
 4.   [ME 402 - Measurements and Control Laboratory](https://bulletin.kfupm.edu.sa/course-details?subject_code=ME&level=Undergraduate)
 
 5.   [ME 553 - Advanced Vibrations](https://bulletin.kfupm.edu.sa/course-details?subject_code=ME&level=Graduate)
+
+6.   [ME 695 - Vibration of Continuous Systems](https://bulletin.kfupm.edu.sa/course-details?subject_code=ME&level=Graduate)
