@@ -27,3 +27,7 @@ hide:
 1.  Ali Abdulai (09/2024 - 05/2026)
 
 2.  Abdullah Alharthi (09/2025 - present)
+
+## Undergraduate Researchers
+
+1.  Mohammed Almasri (08/2026 - present)

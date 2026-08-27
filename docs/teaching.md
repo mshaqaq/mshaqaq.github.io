@@ -17,3 +17,5 @@ hide:
 5.   [ME 553 - Advanced Vibrations](https://bulletin.kfupm.edu.sa/course-details?subject_code=ME&level=Graduate)
 
 6.   [ME 695 - Vibration of Continuous Systems](https://bulletin.kfupm.edu.sa/course-details?subject_code=ME&level=Graduate)
+
+7.   [RES-200 - Independent Research](https://ri.kfupm.edu.sa/dr/opportunities/students/undergraduate-students/independent-research)
