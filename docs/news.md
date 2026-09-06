@@ -12,6 +12,10 @@ hide:
 
 :   Our paper "Bandgap formation and dual rainbow trapping in graded ladder-shunted piezoelectric metamaterial beams" is now published.
 
+**19-August-2026**{.news-tag}
+
+:   Mohammed Almasri joins the group as an undergraduate researcher. Welcome!
+
 **08-July-2026**{.news-tag}
 
 :   Our paper "Bayesian Optimization of Resonator Grading for Bandgap Widening in Finite Locally Resonant Acoustic Metamaterials" is now published.
