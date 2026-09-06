@@ -22,6 +22,8 @@ hide:
 
 8.  **Alshaqaq, M.**, 2026, "[Bandgap Formation and Dual Rainbow Trapping in Graded Ladder-Shunted Piezoelectric Metamaterial Beams](https://doi.org/10.1016/j.rineng.2026.112556)," Results in Engineering, 32, 112556.
 
+9.  **Alshaqaq, M.**, 2026, "[A harmonic-oscillator analogy for elastic wave localization in piezoelectric metamaterial beams](https://doi.org/10.1016/j.euromechsol.2026.106357)," European Journal of Mechanics - A/Solids, 106357.
+
 
 
 

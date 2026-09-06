@@ -4,6 +4,10 @@ hide:
 ---
 
 ## 2026
+**06-September-2026**{.news-tag}
+
+:   Our paper "A harmonic-oscillator analogy for elastic wave localization in piezoelectric metamaterial beams" is now published.
+
 **26-August-2026**{.news-tag}
 
 :   Our paper "Bandgap formation and dual rainbow trapping in graded ladder-shunted piezoelectric metamaterial beams" is now published.
