@@ -21,6 +21,8 @@ hide:
 
 1.   Hesham Abduo (09/2025 - present)
 
+2.   Muhammad Umair (09/2026 - present)
+
 
 ## M.S. Students
 

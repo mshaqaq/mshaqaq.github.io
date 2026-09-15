@@ -4,6 +4,10 @@ hide:
 ---
 
 ## 2026
+**15-September-2026**{.news-tag}
+
+:   Muhammad Umair joins the group as a Ph.D. student. Welcome!
+
 **06-September-2026**{.news-tag}
 
 :   Our paper "A harmonic-oscillator analogy for elastic wave localization in piezoelectric metamaterial beams" is now published.
