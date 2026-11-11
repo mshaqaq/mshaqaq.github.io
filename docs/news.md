@@ -4,6 +4,18 @@ hide:
 ---
 
 ## 2026
+**10-November-2026**{.news-tag}
+
+:   Prof. Alshaqaq presents our work "Reconfigurable Elastic Wave Trapping in a Piezoelectric Metamaterial Beam via a Quadratic Electrical-Resonance Well" at ASME IMECE 2026 in Vancouver, Canada.
+
+**19-October-2026**{.news-tag}
+
+:   Our paper "Lightweight design stress-based of an efficient piezoelectric energy harvester" is now published in Results in Engineering.
+
+**13-October-2026**{.news-tag}
+
+:   Our paper "Broadband low-frequency energy harvesting using graded metamaterial piezoelectric" is now published in Scientific Reports.
+
 **15-September-2026**{.news-tag}
 
 :   Muhammad Umair joins the group as a Ph.D. student. Welcome!

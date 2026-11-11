@@ -24,6 +24,10 @@ hide:
 
 9.  **Alshaqaq, M.**, 2026, "[A harmonic-oscillator analogy for elastic wave localization in piezoelectric metamaterial beams](https://doi.org/10.1016/j.euromechsol.2026.106357)," European Journal of Mechanics - A/Solids, 106357.
 
+10.  Kouritem, S.A., Bashmal, S., and **Alshaqaq, M.**, 2026, "[Broadband low-frequency energy harvesting using graded metamaterial piezoelectric](https://doi.org/10.1038/s41598-026-60480-3)," Scientific Reports, 16, 32093.
+
+11.  Kouritem, S.A., Bashmal, S., and **Alshaqaq, M.**, 2026, "[Lightweight design stress-based of an efficient piezoelectric energy harvester](https://doi.org/10.1016/j.rineng.2026.113662)," Results in Engineering, 32, 113662.
+
 
 
 
@@ -43,6 +47,8 @@ hide:
 6.  **Alshaqaq, M** and Erturk, A., 2024, “[Leveraging Rainbow and Acoustic Black Hole Concepts in Piezoelectric Energy Harvesting from Metamaterials](https://smasis.secure-platform.com/a/solicitations/231/sessiongallery/17539/application/140505),” ASME 2024 Smart Materials, Adaptive Structures and Intelligent Systems, Atlanta, GA, 9-11 September 2024.
 
 7.   Alshaqaq, M, 2025, “[Roton-like Dispersion in Nonlocally Resonant Piezoelectric Metamaterials](https://smasis.secure-platform.com/a/solicitations/259/sessiongallery/20708/application/171899),” ASME 2025 Smart Materials, Adaptive Structures and Intelligent Systems, St. Louis, MO, 8-10 September 2025. 
+
+8.  **Alshaqaq, M.**, 2026, "Reconfigurable Elastic Wave Trapping in a Piezoelectric Metamaterial Beam via a Quadratic Electrical-Resonance Well," ASME 2026 International Mechanical Engineering Congress and Exposition (IMECE2026), Vancouver, BC, Canada, 8-12 November 2026.
 
 
 
