@@ -26,7 +26,7 @@ hide:
 
 ## M.S. Students
 
-1.  Ali Abdulai (09/2024 - 05/2026)
+1.  Ali Abdulai (09/2024 - 05/2026) [\[M.S. thesis\]](https://eprints.kfupm.edu.sa/id/eprint/144262/)
 
 2.  Abdullah Alharthi (09/2025 - present)
 
